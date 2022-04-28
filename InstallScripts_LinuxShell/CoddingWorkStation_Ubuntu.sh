@@ -5,7 +5,8 @@ apt-get update
 apt-get -y upgrade
 
 # Geral-Basico - DIVERSOS
-apt-get install -y net-tools gparted nmap guvcview samba
+apt-get install -y net-tools gparted nmap guvcview samba xclip
+apt-get install -y p7zip p7zip-full p7zip-rar
 apt-get install -y flatpack #evitar de usar flatpacks
 snap install homeserver
 
