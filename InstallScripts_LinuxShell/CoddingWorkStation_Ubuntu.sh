@@ -1,4 +1,5 @@
 #!/bin/bash
+## VERSÃO DO SISTEMA: 22.04 LTS
 sudo su
 
 apt-get update
@@ -44,8 +45,8 @@ rm discord*.deb
 
 #Node JS
 curl -sL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
-apt-get install -y nodejs npm
-apt --fix-broken install -y
+apt-get update
+apt --fix-broken install -y -f nodejs
 npm install --global yarn
 
 #Wine
@@ -55,7 +56,7 @@ winetricks dotnet48
 
 # Configurando SWAP Memory
 cd /
-sudo swapoff /swapfile #desativa SWAP
+swapoff /swapfile #desativa SWAP
 sudo rm /swapfile #Exclui arquivo velho
 sudo fallocate -l 5G /swapfile #novo arquivo de 5GB
 sudo chmod 600 /swapfile
