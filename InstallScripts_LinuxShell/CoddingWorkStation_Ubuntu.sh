@@ -4,8 +4,9 @@ sudo su
 apt-get update
 apt-get -y upgrade
 
-# Geral-Basico - REDE
+# Geral-Basico - DIVERSOS
 apt-get install -y net-tools gparted nmap guvcview samba
+snap install homeserver
 
 # Geral-Basico - CODING
 apt-get install -y python3 python3-pip
@@ -17,9 +18,6 @@ snap install code --classic
 apt-get install -y obs-studio vlc
 apt-get install -y gimp inkscape imagemagick
 snap install flameshot
-
-# Arquivos
-snap install homeserver
 
 # Comunicação-Social
 flatpak install flathub -y org.telegram.desktop
