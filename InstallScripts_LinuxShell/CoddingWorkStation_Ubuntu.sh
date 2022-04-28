@@ -6,12 +6,13 @@ apt-get -y upgrade
 
 # Geral-Basico - DIVERSOS
 apt-get install -y net-tools gparted nmap guvcview samba
+apt-get install -y flatpack #evitar de usar flatpacks
 snap install homeserver
 
 # Geral-Basico - CODING
 apt-get install -y python3 python3-pip
 apt-get install -y git curl filezilla
-flatpak install flathub -y com.getpostman.Postman
+snap install postman
 snap install code --classic
 
 # Publicidade-Imagens-Edição
