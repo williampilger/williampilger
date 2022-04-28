@@ -23,7 +23,7 @@ apt-get install -y gimp inkscape imagemagick
 snap install flameshot
 
 # Comunicação-Social
-flatpak install flathub -y org.telegram.desktop
+snap install telegram-desktop
 ###flatpak install flathub -y WhatsAppQT
 
 # Spotify
