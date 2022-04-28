@@ -25,7 +25,8 @@ flatpak install flathub -y org.telegram.desktop
 ###flatpak install flathub -y WhatsAppQT
 
 # Spotify
-flatpak install flathub -y com.spotify.Client
+###flatpak install flathub -y com.spotify.Client
+snap install spotify
 
 # Google Chrome
 cd /home/$USER/Downloads
