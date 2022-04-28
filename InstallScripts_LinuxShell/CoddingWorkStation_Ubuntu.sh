@@ -39,11 +39,13 @@ rm google-chrome-stable_current_amd64.deb
 cd /home/$USER/Downloads
 wget -c https://discord.com/api/download?platform=linux&format=deb
 dpkg -i discord*.deb
+apt --fix-broken install -y
 rm discord*.deb
 
 #Node JS
 curl -sL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
 apt-get install -y nodejs npm
+apt --fix-broken install -y
 npm install --global yarn
 
 #Wine
