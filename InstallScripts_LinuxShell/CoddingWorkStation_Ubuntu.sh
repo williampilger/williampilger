@@ -54,21 +54,8 @@ apt-get install -y wine winetricks playonlinux
 winetricks dotnet48
 
 
-# Configurando SWAP Memory
-cd /
-swapoff /swapfile #desativa SWAP
-sudo rm /swapfile #Exclui arquivo velho
-sudo fallocate -l 5G /swapfile #novo arquivo de 5GB
-sudo chmod 600 /swapfile
-sudo mkswap /swapfile
-sudo swapon /swapfile #reativar SWAP
-
-
-
 
 # Resta instalar manualmente
-# VM Ware
-# TeamViewer
 # insync
 # Virtual Box
 
