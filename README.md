@@ -7,7 +7,7 @@
 
 
 #### Destaques da vez:
- - Pessoal
-  - [Script de instalação - LinuxDistributions](InstallScripts_LinuxShell)
- - Nossas Criações -> Authenty Team
-  - [AuthFlexão - BETA - ReactJS](https://www.authentydev.com.br/WebApps/FlexaoSimples);
+- Pessoal
+   - [Script de instalação - LinuxDistributions](InstallScripts_LinuxShell)
+- Nossas Criações -> Authenty Team
+   - [AuthFlexão - BETA - ReactJS](https://www.authentydev.com.br/WebApps/FlexaoSimples);
