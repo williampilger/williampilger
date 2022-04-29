@@ -6,3 +6,6 @@
 ![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=williampilger&show_icons=true&theme=radical&layout=compact)
 
  - [Script de instalação - LinuxDistributions](InstallScripts_LinuxShell)
+
+#### Destaques da vez:
+ - [AuthFlexão - BETA - ReactJS](https://www.authentydev.com.br/WebApps/FlexaoSimples);
