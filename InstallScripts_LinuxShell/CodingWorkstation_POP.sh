@@ -59,3 +59,7 @@ winetricks dotnet48
 # Resta instalar manualmente
 # insync
 # Virtual Box
+
+# SSH Github
+ssh-keygen -t ed25519 -C "GitHub - WilliamPilger - MICRO-02 - Escritório"
+xclip -sel clip < ~/.ssh/id_ed25519.pub
