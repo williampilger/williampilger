@@ -21,6 +21,7 @@ sudo apt-get install -y obs-studio vlc
 sudo apt-get install -y gimp inkscape imagemagick
 ###sudo snap install flameshot
 flatpak install flathub -y flameshot
+flatpak install flathub -y org.onlyoffice.desktopeditors
 
 # Comunicação-Social
 ###snap install telegram-desktop
