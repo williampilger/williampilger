@@ -5,7 +5,7 @@ sudo apt-get update
 sudo apt-get -y upgrade
 
 # Geral-Basico - DIVERSOS
-sudo apt-get install -y net-tools gparted nmap guvcview samba xclip gdebi
+sudo apt-get install -y net-tools gparted nmap guvcview samba xclip gdebi remmina
 sudo apt-get install -y p7zip p7zip-full p7zip-rar
 sudo apt-get install -y snapd
 sudo snap install homeserver
@@ -53,7 +53,6 @@ sudo npm install --global yarn
 #Wine
 sudo apt-get install -y wine winetricks playonlinux
 winetricks dotnet48
-
 
 
 # Resta instalar manualmente
