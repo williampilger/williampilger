@@ -7,6 +7,7 @@ sudo apt-get -y upgrade
 # Geral-Basico - DIVERSOS
 sudo apt-get install -y net-tools gparted nmap guvcview samba xclip gdebi remmina
 sudo apt-get install -y p7zip p7zip-full p7zip-rar
+sudo apt-get install -y gnome-boxes
 sudo apt-get install -y snapd
 sudo snap install homeserver
 
