@@ -16,6 +16,7 @@ sudo apt-get install -y python3 python3-pip
 sudo apt-get install -y git curl filezilla
 flatpak install flathub -y com.getpostman.Postman
 flatpak install flathub -y com.visualstudio.code
+flatpak install flathub -y org.kde.kcolorchooser
 
 # Publicidade-Imagens-Edição
 sudo apt-get install -y obs-studio vlc
