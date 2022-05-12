@@ -55,8 +55,7 @@ sudo apt --fix-broken install -y -f nodejs
 sudo npm install --global yarn
 
 #Wine
-sudo apt-get install -y wine winetricks playonlinux
-winetricks dotnet48
+flatpak install flathub com.usebottles.bottles
 
 
 # Resta instalar manualmente
