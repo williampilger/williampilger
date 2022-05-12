@@ -55,7 +55,7 @@ sudo apt --fix-broken install -y -f nodejs
 sudo npm install --global yarn
 
 #Wine
-flatpak install flathub com.usebottles.bottles
+flatpak install flathub -y com.usebottles.bottles
 
 
 # Resta instalar manualmente
