@@ -25,6 +25,7 @@ sudo apt-get install -y gimp inkscape imagemagick
 flatpak install flathub -y flameshot
 flatpak install flathub -y org.onlyoffice.desktopeditors
 flatpak install flathub -y com.github.xournalpp.xournalpp
+flatpak install flathub -y com.uploadedlobster.peek
 
 # Comunicação-Social
 ###snap install telegram-desktop
