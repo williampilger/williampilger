@@ -58,7 +58,8 @@ sudo npm install --global yarn
 
 #Wine
 flatpak install flathub -y com.usebottles.bottles
-
+apt-get install -y wine winetricks
+winetricks dotnet48
 
 # Resta instalar manualmente
 # VS Code (DEB. pois flatpack não funciona terminal)
