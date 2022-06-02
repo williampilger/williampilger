@@ -28,10 +28,11 @@ flatpak install flathub -y org.onlyoffice.desktopeditors
 flatpak install flathub -y com.github.xournalpp.xournalpp
 flatpak install flathub -y com.uploadedlobster.peek
 flatpak install flathub -y com.github.maoschanz.drawing
+flatpak install flathub -y net.xmind.XMind
 
 # Comunicação-Social
 ###snap install telegram-desktop
-flatpak install flathub -y WhatsAppQT
+flatpak install flathub -y io.github.mimbrero.WhatsAppDesktop
 flatpak install flathub -y telegram-desktop
 
 # Spotify
