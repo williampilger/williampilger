@@ -98,4 +98,6 @@ local_umask=022
 apt -y install mysql-server
 mysql_secure_installation #Instalação Gráfica
 
+# ---------------------------------- PHP Server ---------------------------------------#
+apt install -y php libapache2-mod-php php-mysql
 
