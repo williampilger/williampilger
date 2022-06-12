@@ -20,6 +20,7 @@ ufw allow 'Apache'
 ufw status
 
 mkdir /var/www/authentylocal
+sudo chown -R $USER:$USER /var/www/authentylocal
 chmod -R 777 /var/www/authentylocal
 chown -R $USER:www-data /var/www/authentylocal
 echo '''
@@ -89,3 +90,4 @@ utf8_filesystem=YES
 # userlist_file=/etc/vsftpd.userlist
 ''' >> /etc/vsftpd.conf
 /etc/init.d/vsftpd restart
+
