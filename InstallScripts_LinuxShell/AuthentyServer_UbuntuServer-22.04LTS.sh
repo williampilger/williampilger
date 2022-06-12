@@ -28,7 +28,7 @@ echo '''
         <title>Bem-vindo a AuthentyLocal!</title>
     </head>
     <body>
-        <h1>Sucesso!  Seu domínio virtual está funcionando!</h1>
+        <h1>Sucesso!  Seu dominio virtual esta funcionando!</h1>
     </body>
 </html>
 '''> /var/www/authentylocal/index.html
@@ -67,7 +67,25 @@ apt-get -y install vsftpd
 systemctl start vsftpd
 sudo ufw allow 20/tcp
 sudo ufw allow 21/tcp
-cp /etc/vsftpd.conf /etc/vsftpd.conf.orig #cópia de segurança
+mv /etc/vsftpd.conf /etc/vsftpd.conf.orig #cópia de segurança
 echo '''
-
-''' > /etc/vsftpd.conf
+listen=NO
+listen_ipv6=YES
+anonymous_enable=NO
+local_enable=YES
+write_enable=YES
+xferlog_enable=YES
+dirmessage_enable=YES
+use_localtime=YES
+connect_from_port_20=YES
+secure_chroot_dir=/var/run/vsftpd/empty
+pam_service_name=vsftpd
+rsa_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem
+rsa_private_key_file=/etc/ssl/private/ssl-cert-snakeoil.key
+ssl_enable=NO
+utf8_filesystem=YES
+# userlist_deny=NO
+# userlist_enable=YES
+# userlist_file=/etc/vsftpd.userlist
+''' >> /etc/vsftpd.conf
+/etc/init.d/vsftpd restart
