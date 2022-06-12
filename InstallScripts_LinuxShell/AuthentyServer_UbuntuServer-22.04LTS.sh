@@ -62,4 +62,12 @@ a2dissite 000-default.conf #desabilita o antigo
 a2enmod ssl #ativar suporte à SSL
 systemctl restart apache2 #reiniciando o apache
 
+# ---------------------------------- FTP Server ---------------------------------------#
+apt-get -y install vsftpd
+systemctl start vsftpd
+sudo ufw allow 20/tcp
+sudo ufw allow 21/tcp
+cp /etc/vsftpd.conf /etc/vsftpd.conf.orig #cópia de segurança
+echo '''
 
+''' > /etc/vsftpd.conf
