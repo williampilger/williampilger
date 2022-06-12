@@ -85,9 +85,17 @@ rsa_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem
 rsa_private_key_file=/etc/ssl/private/ssl-cert-snakeoil.key
 ssl_enable=NO
 utf8_filesystem=YES
+file_open_mode=0777
+local_umask=022
 # userlist_deny=NO
 # userlist_enable=YES
 # userlist_file=/etc/vsftpd.userlist
 ''' >> /etc/vsftpd.conf
 /etc/init.d/vsftpd restart
+
+
+# --------------------------------- MySQL Server --------------------------------------#
+apt -y install mysql-server
+mysql_secure_installation #Instalação Gráfica
+
 
