@@ -36,7 +36,7 @@ echo '''
 echo '''
 <VirtualHost *:80>
     ServerAdmin webmaster@localhost
-    ServerName authentylocal
+    ServerName www.authentylocal.com.br
     ServerAlias www.authentylocal
     DocumentRoot /var/www/authentylocal
     ErrorLog ${APACHE_LOG_DIR}/error.log
@@ -46,7 +46,7 @@ echo '''
 echo '''
 <VirtualHost *:443>
     ServerAdmin webmaster@localhost
-    ServerName authentylocal
+    ServerName www.authentylocal.com.br
     ServerAlias www.authentylocal
     DocumentRoot /var/www/authentylocal
     ErrorLog ${APACHE_LOG_DIR}/error.log
