@@ -10,9 +10,11 @@ apt-get upgrade -y
 sudo apt dist-upgrade -y
 
 # --------------------------------- Suporte a SSH -------------------------------------#
-apt-get install -y openssh-server net-tools
+apt-get install -y openssh-server
 service ssh start
 
+# ------------------------------ Ferramentas diversas ---------------------------------#
+apt-get install -y net-tools glances
 
 # ------------------------------------ Apache -----------------------------------------#
 apt-get install -y apache2
