@@ -58,6 +58,23 @@ sudo apt-get update
 sudo apt --fix-broken install -y -f nodejs
 sudo npm install --global yarn
 
+#WakeOnLan
+INTERFACE="enp4s0"
+apt-get install -y ethtool
+echo """
+[Unit]
+Description=Habilitar Wake On Lan
+
+[Service]
+Type=oneshot
+ExecStart = /sbin/ethtool --change $INTERFACE wol g
+
+[Install]
+WantedBy=basic.target
+""" > /etc/systemd/system/wol.service
+systemctl daemon-reload
+systemctl enable wol.service
+
 #Wine
 flatpak install flathub -y com.usebottles.bottles
 apt-get install -y wine winetricks
