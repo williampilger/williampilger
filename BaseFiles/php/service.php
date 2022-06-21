@@ -14,27 +14,30 @@
 require_once __DIR__.'/_local/config.php';
 
 if(log_operacoes) $microtimeStart = microtime(true);
-
+$status = 500;
 try
 {
-    require_once __DIR__.'/local/sql_tools.php';
 
-    $result = Array('status'=>0);
+    $result = ['status'=>0];
 
     //Seu código aqui
 
     if(log_operacoes)
     {
         $microtimeTotal = microtime(true) - $microtimeStart;
-        logInterno('PHP_WS', "[$microtimeTotal s] ".__FILE__."(_GET='$_GET') -> status='".$result['status']."'");
+        logInterno(11, "[$microtimeTotal s] SAMPLE.PHP( ) -> status='".$status."'");
     }
 }
 catch(Exception $e)
 {
-    logInterno('EXCEPTION', 'Exception ocorreu em \''.__FILE__.'\' e=\''.$e->__toString().'\'.');
-    $result = array('status'=>20,'mensagem'=>'Erro AD2202231042.');
+    $status = 506; // Erro/Conflito interno
+    logInterno(6, 'Exception ocorreu em \''.__FILE__.'\' e=\''.$e->__toString().'\'.');
 }
 
-echo json_encode($result);
+if($status == 200 && isset($result)){
+    echo json_encode($result);
+}
+
+http_response_code($status);
 
 ?>
