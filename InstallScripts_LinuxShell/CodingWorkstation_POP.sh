@@ -82,7 +82,8 @@ setup_WakeOnLan
 setup_rustDesk(){
 	URL="https://github.com/rustdesk/rustdesk/releases/download/1.1.9/RustDesk-1.1.10-x86_64_1804.AppImage"
 	mkdir /AppImages
-	wget -c $URL -o /AppImages/RustDesk.AppImage
+	wget $URL -o /AppImages/RustDesk.AppImage
+	chmod +x /AppImages/RustDesk.AppImage
 	echo """
 [Unit]
 Description=Inicio automático do RustDesk
