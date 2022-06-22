@@ -59,9 +59,10 @@ sudo apt --fix-broken install -y -f nodejs
 sudo npm install --global yarn
 
 #WakeOnLan
-INTERFACE="enp4s0"
-apt-get install -y ethtool
-echo """
+setup_WakeOnLan(){
+  INTERFACE="enp4s0"
+  apt-get install -y ethtool
+  echo """
 [Unit]
 Description=Habilitar Wake On Lan
 
@@ -71,9 +72,43 @@ ExecStart = /sbin/ethtool --change $INTERFACE wol g
 
 [Install]
 WantedBy=basic.target
-""" > /etc/systemd/system/wol.service
-systemctl daemon-reload
-systemctl enable wol.service
+  """ > /etc/systemd/system/wol.service
+  systemctl daemon-reload
+  systemctl enable wol.service
+}
+setup_WakeOnLan
+
+#RustDesk
+setup_rustDesk(){
+	URL="https://github.com/rustdesk/rustdesk/releases/download/1.1.9/RustDesk-1.1.10-x86_64_1804.AppImage"
+	mkdir /AppImages
+	wget -c $URL -o /AppImages/RustDesk.AppImage
+	echo """
+[Unit]
+Description=Inicio automático do RustDesk
+After=network.target
+
+[Service]
+Type=simple
+LimitNOFILE=1024
+
+Restart=on-failure
+RestartSec=10
+startLimitIntervalSec=60
+Environment=DISPLAY=:0
+ExecStart=/AppImages/RustDesk.AppImage
+
+PermissionsStartOnly=true
+StandardOutput=syslog
+StandardError=syslog
+
+[Install]
+WantedBy=multi-user.target
+	""" > /etc/systemd/system/RustDesk.service
+	systemctl daemon-reload
+	systemctl enable wol.service
+}
+setup_rustDesk
 
 #Wine
 flatpak install flathub -y com.usebottles.bottles
