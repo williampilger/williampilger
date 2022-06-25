@@ -34,7 +34,7 @@ catch(Exception $e)
     logInterno(6, 'Exception ocorreu em \''.__FILE__.'\' e=\''.$e->__toString().'\'.');
 }
 
-if($status == 200 && isset($result)){
+if(isset($result)){
     echo json_encode($result);
 }
 
