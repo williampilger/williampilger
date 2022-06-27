@@ -6,7 +6,7 @@
  * 2022.02.23 - Bom Princípio - RS
  * ♪ - / -
  *  
- * Classe responsável por ... .
+ * Class responsible for ... .
  * 
  */
 require_once __DIR__."/../config.php";
@@ -20,19 +20,19 @@ class Classe
     }
 
     // #####################################################################################################################
-    // # Métodos PÚBLICOS - Métodos PÚBLICOS - Métodos PÚBLICOS - Métodos PÚBLICOS - Métodos PÚBLICOS - Métodos PÚBLICOS - #
+    // # PUBLIC Methods - PUBLIC Methods - PUBLIC Methods - PUBLIC Methods - PUBLIC Methods - PUBLIC Methods - PUBLIC Meth #
     // #####################################################################################################################
 
     // #####################################################################################################################
-    // # Métodos PÚBLICOS ESTÁTICOS - Métodos PÚBLICOS ESTÁTICOS - Métodos PÚBLICOS ESTÁTICOS - Métodos PÚBLICOS ESTÁTICOS #
+    // # STATIC PUBLIC Methods - STATIC PUBLIC Methods - STATIC PUBLIC Methods - STATIC PUBLIC Methods - STATIC PUBLIC Met #
     // #####################################################################################################################
 
     // #####################################################################################################################
-    // # Métodos PRIVADOS - Métodos PRIVADOS - Métodos PRIVADOS - Métodos PRIVADOS - Métodos PRIVADOS - Métodos PRIVADOS - #
+    // # PRIVATE Methods - PRIVATE Methods - PRIVATE Methods - PRIVATE Methods - PRIVATE Methods - PRIVATE Methods - PRIVA #
     // #####################################################################################################################
 
     // #####################################################################################################################
-    // # Métodos PRIVADOS ESTÁTICOS - Métodos PRIVADOS ESTÁTICOS - Métodos PRIVADOS ESTÁTICOS - Métodos PRIVADOS ESTÁTICOS #
+    // # STATIC PRIVATE Methods - STATIC PRIVATE Methods - STATIC PRIVATE Methods - STATIC PRIVATE Methods - STATIC PRIVAT #
     // #####################################################################################################################
 
 }

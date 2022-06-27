@@ -4,10 +4,10 @@
  * Authenty AE - Bom Princípio-RS  |  github.com/authentyAE
  * by: will.i.am                   |  github.com/williampilger
  *
- * 2022.02.23 - Bom Princípio - RS
+ * 2022.06.26 - Bom Princípio - RS
  * ♪ - / -
  *  
- * Serviço responsável por ... .
+ * Service responsible for... .
  * 
  */
 
@@ -20,7 +20,7 @@ try
 
     $result = ['status'=>0];
 
-    //Seu código aqui
+    //Your code here
 
     if(log_operacoes)
     {
@@ -30,8 +30,8 @@ try
 }
 catch(Exception $e)
 {
-    $status = 506; // Erro/Conflito interno
-    logInterno(6, 'Exception ocorreu em \''.__FILE__.'\' e=\''.$e->__toString().'\'.');
+    $status = 506; // Internal Error/Conflict
+    logInterno(6, 'Exception in \''.__FILE__.'\' e=\''.$e->__toString().'\'.');
 }
 
 if(isset($result)){
