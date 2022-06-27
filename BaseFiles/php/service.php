@@ -25,13 +25,13 @@ try
     if(log_operacoes)
     {
         $microtimeTotal = microtime(true) - $microtimeStart;
-        logInterno(11, "[$microtimeTotal s] ".__FILE__."( ) -> status='".$status."'");
+        internalLOG(11, "[$microtimeTotal s] ".__FILE__."( ) -> status='".$status."'");
     }
 }
 catch(Exception $e)
 {
     $status = 506; // Internal Error/Conflict
-    logInterno(6, 'Exception in \''.__FILE__.'\' e=\''.$e->__toString().'\'.');
+    internalLOG(6, 'Exception in \''.__FILE__.'\' e=\''.$e->__toString().'\'.');
 }
 
 if(isset($result)){
