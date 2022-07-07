@@ -18,6 +18,7 @@ flatpak install flathub -y com.getpostman.Postman
 flatpak install flathub -y com.visualstudio.code
 flatpak install flathub -y org.kde.kcolorchooser
 flatpak install flathub -y md.obsidian.Obsidian
+snap install mysql-workbench-community
 
 # Publicidade-Imagens-Edição
 sudo apt-get install -y obs-studio vlc
