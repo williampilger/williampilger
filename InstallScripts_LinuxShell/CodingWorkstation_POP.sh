@@ -20,8 +20,8 @@ flatpak install flathub -y org.kde.kcolorchooser
 flatpak install flathub -y md.obsidian.Obsidian
 
 # Publicidade-Imagens-Edição
-sudo apt-get install -y obs-studio vlc
-sudo apt-get install -y gimp inkscape imagemagick
+sudo apt-get install -y obs-studio linux-headers-$(uname -r) v4l2loopback-dkms
+sudo apt-get install -y gimp inkscape imagemagick vlc
 ###sudo snap install flameshot
 flatpak install flathub -y flameshot
 flatpak install flathub -y org.onlyoffice.desktopeditors
