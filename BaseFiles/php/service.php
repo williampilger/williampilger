@@ -25,7 +25,7 @@ try
     if(log_operacoes)
     {
         $microtimeTotal = microtime(true) - $microtimeStart;
-        internalLOG(11, "[$microtimeTotal s] ".__FILE__."( ) -> status='".$status."'");
+        internalLOG(11, "[$microtimeTotal s] ".__FILE__."( ) -> status='$status'");
     }
 }
 catch(Exception $e)
