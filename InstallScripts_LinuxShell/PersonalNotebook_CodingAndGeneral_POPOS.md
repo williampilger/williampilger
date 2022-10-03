@@ -40,6 +40,12 @@ flatpak install flathub -y telegram-desktop
 flatpak install flathub -y com.spotify.Client
 ###sudo snap install spotify
 
+# VS Code
+# cd /home/$USER/Downloads
+# wget -c 'https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64' -o vscode.deb
+# sudo dpkg -i vscode.deb
+# rm vscode.deb
+
 # Google Chrome
 cd /home/$USER/Downloads
 wget -c 'https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb'
