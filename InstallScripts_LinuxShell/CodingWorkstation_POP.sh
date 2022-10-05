@@ -29,6 +29,7 @@ flatpak install flathub -y com.github.xournalpp.xournalpp
 flatpak install flathub -y com.uploadedlobster.peek
 flatpak install flathub -y com.github.maoschanz.drawing
 flatpak install flathub -y net.xmind.XMind
+flatpak install flathub com.obsproject.Studio
 
 # Comunicação-Social
 ###snap install telegram-desktop
