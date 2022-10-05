@@ -35,6 +35,7 @@ flatpak install flathub -y net.xmind.XMind
 ###snap install telegram-desktop
 flatpak install flathub -y io.github.mimbrero.WhatsAppDesktop
 flatpak install flathub -y telegram-desktop
+flatpak install flathub com.obsproject.Studio
 
 # Spotify
 flatpak install flathub -y com.spotify.Client
