@@ -42,16 +42,16 @@ flatpak install flathub -y com.spotify.Client
 
 # Google Chrome
 cd /home/$USER/Downloads
-wget -c 'https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb'
-sudo dpkg -i google-chrome-stable_current_amd64.deb
-rm google-chrome-stable_current_amd64.deb
+wget -O chrome.deb 'https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb'
+sudo dpkg -i chrome.deb
+rm chrome.deb
 
 # Discord (instalado via .deb pra ter compatibilidade com a captura de atividade)
 cd /home/$USER/Downloads
-wget -c 'https://discord.com/api/download?platform=linux&format=deb'
+wget -O discord.deb 'https://discord.com/api/download?platform=linux&format=deb'
 sudo dpkg -i discord.deb
 apt --fix-broken install -y
-rm discord*.deb
+rm discord.deb
 
 #Node JS
 curl -sL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
