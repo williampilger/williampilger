@@ -25,7 +25,7 @@
     </a>
 </div> -->
 
-[![ Github Stats Graph](https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=williampilger&theme=radical&hide_border=true)
+
 
 <p align="center">
     <a href="https://github.com/williampilger">
@@ -33,6 +33,6 @@
         <img width="49%" src="https://github-readme-stats.vercel.app/api?username=williampilger&show_icons=true&theme=transparent&include_all_commits=true&count_private=true&hide_border=true"/>
         <img width="49%" src="https://github-readme-stats.vercel.app/api/top-langs/?username=williampilger&layout=compact&langs_count=7&theme=transparent&hide_border=true"/>
        
-<!--         <img width="49%" src="https://activity-graph.herokuapp.com/graph?username=williampilger&theme=github-dark-blue&icon_color=DAD3AF&hide_border=true&border_radius=15&bg_color=00000000&point=273638&color=055edb&line=055edb" alt="GitHub Commits Graph" /> -->
+        <img width="49%" src="[https://activity-graph.herokuapp.com/graph?username=williampilger&theme=github-dark-blue&icon_color=DAD3AF&hide_border=true&border_radius=15&bg_color=00000000&point=273638&color=055edb&line=055edb](https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=williampilger&theme=radical&hide_border=true)" alt="Github Stats Graph" />
     </a>
 </p>
