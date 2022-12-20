@@ -6,6 +6,19 @@ LOG(){
 	echo $(date) - $CONTENT >> LOG.txt
 }
 
+deb_install(){
+	URL=$1
+	cd /home/$USER/Downloads
+	wget -O setup.deb "$URL"
+	sudo dpkg -i setup.deb
+	if [ "$?" == 0 ]; then
+		LOG "	2212201205 - Successfully install .DEB '$URL'."
+	else
+		LOG "	2212201206 - Impossible install .DEB '$URL'."
+	fi
+	rm setup.deb
+}
+
 apt_install(){
 	SOFTWARE=$1
 	if ! dpkg -l | grep -q $SOFTWARE; then
@@ -120,15 +133,19 @@ for nome_do_programa in ${SNAP_PROGRAMS[@]}; do
 	snap_install $nome_do_programa
 done
 
+LOG '2212201207 - Start .deb APPs instalation:'
+
+DEB_PROGRAMS=(
+	'https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb'
+	'https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64'
+)
+for nome_do_programa in ${DEB_PROGRAMS[@]}; do
+	deb_install $nome_do_programa
+done
+
 
 LOG '2212200913 - Start Custom instalations:'
 
-
-# Google Chrome
-cd /home/$USER/Downloads
-wget -O chrome.deb 'https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb'
-sudo dpkg -i chrome.deb
-rm chrome.deb
 
 # Discord (instalado via .deb pra ter compatibilidade com a captura de atividade)
 cd /home/$USER/Downloads
@@ -142,6 +159,7 @@ curl -sL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
 sudo apt-get update
 sudo apt --fix-broken install -y -f nodejs
 sudo npm install --global yarn
+
 
 
 LOG '2212200931 - Start Other configurations:'
