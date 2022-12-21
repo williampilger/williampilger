@@ -74,7 +74,6 @@ APT_PROGRAMS=(
 	p7zip
 	p7zip-full
 	p7zip-rar
-	gnome-boxes
 	snapd
 	# Codding
 	python3
@@ -91,6 +90,17 @@ APT_PROGRAMS=(
 	inkscape
 	imagemagick
 	vlc
+	# Dependencias VMware
+	gcc-6
+	gcc-6-multilib
+	linux-headers-$(uname -r)
+	libx11-6
+	libx11-dev
+	xorg
+	xorg-docs
+	libxtst6
+	psmisc
+	build-essential
 )
 for nome_do_programa in ${APT_PROGRAMS[@]}; do
 	apt_install $nome_do_programa
@@ -108,7 +118,9 @@ FLATPACK_PROGRAMS=(
 	# Publicidade-Imagens-Edição
 	flameshot
 	org.onlyoffice.desktopeditors
+	com.github.xournalpp.xournalpp
 	com.uploadedlobster.peek
+	com.github.maoschanz.drawing
 	# Comunicação-Social
 	org.telegram.desktop
 	io.github.mimbrero.WhatsAppDesktop
@@ -162,28 +174,8 @@ sudo npm install --global yarn
 LOG '2212200931 - Start Other configurations:'
 
 
-#WakeOnLan
-setup_WakeOnLan(){
-  INTERFACE="enp4s0"
-  apt-get install -y ethtool
-  echo """
-[Unit]
-Description=Habilitar Wake On Lan
-
-[Service]
-Type=oneshot
-ExecStart = /sbin/ethtool --change $INTERFACE wol g
-
-[Install]
-WantedBy=basic.target
-  """ > /etc/systemd/system/wol.service
-  systemctl daemon-reload
-  systemctl enable wol.service
-}
-setup_WakeOnLan
-
 # SSH Github
-ssh-keygen -t ed25519 -C "GitHub - WilliamPilger - MICRO-02 - Escritório"
+ssh-keygen -t ed25519 -C "GitHub - WilliamPilger - Notebook Acer Aspire 5"
 xclip -sel clip < ~/.ssh/id_ed25519.pub
 LOG "NEW SSH KEYPAIR GENERATED: $(cat ~/.ssh/id_ed25519.pub)"
 
@@ -192,6 +184,5 @@ LOG '2212200938 - Post-install finished.'
 
 
 # Resta instalar manualmente
-# VS Code (DEB. pois flatpack não funciona terminal)
 # insync
-# Virtual Box
+# VMware
