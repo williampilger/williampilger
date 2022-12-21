@@ -186,6 +186,8 @@ setup_WakeOnLan
 ssh-keygen -t ed25519 -C "GitHub - WilliamPilger - MICRO-02 - Escritório"
 xclip -sel clip < ~/.ssh/id_ed25519.pub
 LOG "NEW SSH KEYPAIR GENERATED: $(cat ~/.ssh/id_ed25519.pub)"
+git config --global user.email "pilger.will@gmail.com"
+git config --global user.name "williampilger"
 
 
 LOG '2212200938 - Post-install finished.'
