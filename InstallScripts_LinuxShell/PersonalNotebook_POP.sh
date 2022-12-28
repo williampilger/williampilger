@@ -75,6 +75,7 @@ APT_PROGRAMS=(
 	p7zip-full
 	p7zip-rar
 	snapd
+	transmission
 	# Codding
 	python3
 	python3-pip
@@ -147,6 +148,7 @@ LOG '2212201207 - Start .deb APPs instalation:'
 DEB_PROGRAMS=(
 	'https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb'
 	'https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64'
+	'https://cdn.insynchq.com/builds/linux/insync_3.8.4.50481-jammy_amd64.deb'
 )
 for nome_do_programa in ${DEB_PROGRAMS[@]}; do
 	deb_install $nome_do_programa
