@@ -114,7 +114,7 @@ FLATPACK_PROGRAMS=(
 	# Codding
 	com.getpostman.Postman
 #	com.visualstudio.code
-	org.kde.kcolorchooser
+#	org.kde.kcolorchooser # Substituido por outro, remover com o tempo
 	md.obsidian.Obsidian
 	# Publicidade-Imagens-Edição
 	flameshot
@@ -122,6 +122,7 @@ FLATPACK_PROGRAMS=(
 	com.github.xournalpp.xournalpp
 	com.uploadedlobster.peek
 	com.github.maoschanz.drawing
+	io.github.lainsce.Colorway
 	# Comunicação-Social
 	org.telegram.desktop
 	io.github.mimbrero.WhatsAppDesktop
