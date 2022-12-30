@@ -102,13 +102,12 @@ LOG '2212200911 - Start Flatpack APPs instalation:'
 FLATPACK_PROGRAMS=(
 	# Codding
 	com.getpostman.Postman
-#	com.visualstudio.code
-	org.kde.kcolorchooser
 	md.obsidian.Obsidian
 	# Publicidade-Imagens-Edição
 	flameshot
 	org.onlyoffice.desktopeditors
 	com.uploadedlobster.peek
+	io.github.lainsce.Colorway
 	# Comunicação-Social
 	org.telegram.desktop
 	io.github.mimbrero.WhatsAppDesktop
