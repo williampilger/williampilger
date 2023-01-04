@@ -165,7 +165,8 @@ LOG '2212200931 - Start Other configurations:'
 setup_WakeOnLan(){
   INTERFACE="enp4s0"
   apt-get install -y ethtool
-  echo """
+  sudo ethtool -s $INTERFACE wol g
+  sudo echo """
 [Unit]
 Description=Habilitar Wake On Lan
 
