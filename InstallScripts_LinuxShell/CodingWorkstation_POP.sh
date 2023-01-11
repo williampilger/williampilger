@@ -76,6 +76,7 @@ APT_PROGRAMS=(
 	p7zip-rar
 	gnome-boxes
 	snapd
+	kdeconnect
 	# Codding
 	python3
 	python3-pip
