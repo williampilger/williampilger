@@ -76,6 +76,7 @@ APT_PROGRAMS=(
 	p7zip-rar
 	snapd
 	transmission
+	kdeconnect
 	# Codding
 	python3
 	python3-pip
