@@ -115,6 +115,7 @@ FLATPACK_PROGRAMS=(
 	# Geral
 	com.usebottles.bottles
 	com.spotify.Client
+	com.github.wwmm.easyeffects
 )
 for nome_do_programa in ${FLATPACK_PROGRAMS[@]}; do
 	flatpack_install $nome_do_programa
