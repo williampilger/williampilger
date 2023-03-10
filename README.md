@@ -26,3 +26,6 @@
         <img width="49%" src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=williampilger&theme=github_dark&hide_border=true" alt="Github Stats Graph"/>
     </a>
 </p>
+
+
+[![spotify-github-profile](https://spotify-github-profile.vercel.app/api/view?uid=a58011aef5294c50&cover_image=true&theme=default&show_offline=false&background_color=121212&bar_color=0ff53d&bar_color_cover=false)](https://spotify-github-profile.vercel.app/api/view?uid=a58011aef5294c50&redirect=true)
