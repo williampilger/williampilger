@@ -75,6 +75,7 @@ DNF_PROGRAMS=(
 	git
 	curl
 	filezilla
+	php
 	# OBS Studio
 	obs-studio
 	linux-headers-$(uname -r)
