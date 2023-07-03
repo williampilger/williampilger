@@ -13,7 +13,8 @@
 - Pessoal
    - [Script de instalação - LinuxDistributions](InstallScripts_LinuxShell)
 - Nossas Criações -> Authenty Team
-   - [AuthFlexão - BETA - ReactJS](https://www.authentydev.com.br/WebApps/FlexaoSimples);
+   - [Site Authenty - ReactJS](https://www.authenty.com.br/home);
+   - [AuthFlexão - BETA - ReactJS](https://app.authenty.com.br/FlexaoSimples);
 
 
 
