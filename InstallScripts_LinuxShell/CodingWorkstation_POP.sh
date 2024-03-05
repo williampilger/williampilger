@@ -83,6 +83,8 @@ APT_PROGRAMS=(
 	git
 	curl
 	filezilla
+ 	docker.io
+  	docker-compose
 	# OBS Studio
 	obs-studio
 	linux-headers-$(uname -r)
@@ -157,7 +159,6 @@ curl -sL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
 sudo apt-get update
 sudo apt --fix-broken install -y -f nodejs
 sudo npm install --global yarn
-
 
 
 LOG '2212200931 - Start Other configurations:'
