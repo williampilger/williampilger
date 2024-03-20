@@ -1,5 +1,6 @@
 #!/bin/bash
 ## VERSÃO DO SISTEMA: POP! OS - 22.04 LTS
+## Latest Version: 2024-03-05 12:24
 
 LOG(){
 	CONTENT=$1
