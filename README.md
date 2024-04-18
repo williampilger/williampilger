@@ -10,13 +10,20 @@
 
 
 #### Destaques da vez:
-- Pessoal
-   - [Script de instalação - LinuxDistributions](InstallScripts_LinuxShell)
+- Pessoal/Personalização
+   - [PostInstall Scripts - LinuxDistributions](InstallScripts_LinuxShell);
+   - [Tutoriais Variados (e bagunçados hehehe)](https://github.com/williampilger/tutoriais);
+- Utilidades Gerais
+   - [Ferramenta de Sincronização de Diretórios - Windows](https://github.com/williampilger/DirSyncTool);
+   - [Ferramenta para Backup Automatizado do Github](https://github.com/williampilger/AutoGitCloneTool);
+   - [Wake-Up-On-LAN - Ligar Máquinas da Rede](https://github.com/williampilger/WOL.py);
 - Nossas Criações -> Authenty Team
    - [Site Authenty - ReactTS](https://www.authenty.com.br/home);
    - [Authenty Flexão - ReactJS](https://app.authenty.com.br/FlexaoSimples);
    - [Authenty Piso - ReactTS](https://app.authenty.com.br/PisoDeConcreto);
-
+- Pequenas aplicações WEB
+   - [Lista de Compras - PHP - SEM AUTENTICAÇÃO](https://github.com/williampilger/utilidades_gerais/tree/master/ListaDeCompras_PHP);
+   - [Página de Contato - PHP - Para criar QR de contato para empresa](https://github.com/williampilger/utilidades_gerais/tree/master/pagina_contato_php);
 
 
 
