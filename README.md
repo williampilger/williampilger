@@ -11,7 +11,8 @@
 
 #### Destaques da vez:
 - Pessoal/Personalização
-   - [PostInstall Scripts - LinuxDistributions](InstallScripts_LinuxShell);
+   - [PostInstall Scripts - LinuxDistributions](PostInstallScripts_LinuxShell);
+   - [PostInstall Scripts - Windows (Beta)](PostInstallScripts_Windows);
    - [Tutoriais Variados (e bagunçados hehehe)](https://github.com/williampilger/tutoriais);
 - Utilidades Gerais
    - [Ferramenta de Sincronização de Diretórios - Windows](https://github.com/williampilger/DirSyncTool);
