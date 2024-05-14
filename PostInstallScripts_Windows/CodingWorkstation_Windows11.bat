@@ -19,8 +19,8 @@ pip install --upgrade pip
 pip install virtualenv
 
 :: Configuração do Node.js
-npm install -g npm@latest
 powershell -Command "Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned"
+npm install -g npm@latest
 
 :: Baixar e instalar Google Chrome
 powershell -Command "Invoke-WebRequest 'https://dl.google.com/tag/s/appguid%3D%7B8A69D345-D564-463C-AFF1-A69D9E530F96%7D%26iid%3D%7B806F36C0-CB54-4B1A-9F2C-5034BD9BD5E7%7D%26lang%3Dpt%26browser%3D4%26usagestats%3D0%26appname%3DGoogle%20Chrome%26needsadmin%3Dprefers%26ap%3Dx64-stable-statsdef_1%26brand%3DGCEA/dl/chrome/install/googlechromestandaloneenterprise64.msi' -OutFile 'chrome_installer.msi'"
