@@ -146,6 +146,7 @@ LOG '2212200912 - Start Snap APPs instalation:'
 SNAP_PROGRAMS=(
 	# Geral
 #	homeserver
+	brave
 )
 for nome_do_programa in ${SNAP_PROGRAMS[@]}; do
 	snap_install $nome_do_programa
@@ -173,12 +174,6 @@ wget -O discord.deb 'https://discord.com/api/download?platform=linux&format=deb'
 sudo dpkg -i discord.deb
 apt --fix-broken install -y
 rm discord.deb
-
-# TOR Browser
-wget -qO - https://deb.torproject.org/torproject.org/gpgkey | sudo apt-key add -
-echo "deb https://deb.torproject.org/torproject.org focal main" | sudo tee /etc/apt/sources.list.d/tor.list
-sudo apt update
-sudo apt install torbrowser-launcher
 
 
 LOG '2212200931 - Start Other configurations:'
