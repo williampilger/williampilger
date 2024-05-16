@@ -79,6 +79,7 @@ APT_PROGRAMS=(
 	snapd
 	transmission
 	kdeconnect
+	gnupg2
 	# Codding
 	python3
 	python3-pip
@@ -173,6 +174,11 @@ sudo dpkg -i discord.deb
 apt --fix-broken install -y
 rm discord.deb
 
+# TOR Browser
+wget -qO - https://deb.torproject.org/torproject.org/gpgkey | sudo apt-key add -
+echo "deb https://deb.torproject.org/torproject.org focal main" | sudo tee /etc/apt/sources.list.d/tor.list
+sudo apt update
+sudo apt install torbrowser-launcher
 
 
 LOG '2212200931 - Start Other configurations:'
