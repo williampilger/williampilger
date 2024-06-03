@@ -19,6 +19,7 @@ pip install --upgrade pip
 pip install virtualenv
 
 :: Configuração do Node.js
+powershell -Command "Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned"
 npm install -g npm@latest
 
 :: Baixar e instalar Google Chrome

@@ -79,6 +79,7 @@ APT_PROGRAMS=(
 	snapd
 	transmission
 	kdeconnect
+	gnupg2
 	# Codding
 	python3
 	python3-pip
@@ -148,6 +149,7 @@ LOG '2212200912 - Start Snap APPs instalation:'
 SNAP_PROGRAMS=(
 	# Geral
 #	homeserver
+	brave
 )
 for nome_do_programa in ${SNAP_PROGRAMS[@]}; do
 	snap_install $nome_do_programa
@@ -178,7 +180,6 @@ wget -O discord.deb 'https://discord.com/api/download?platform=linux&format=deb'
 sudo dpkg -i discord.deb
 apt --fix-broken install -y
 rm discord.deb
-
 
 
 LOG '2212200931 - Start Other configurations:'
