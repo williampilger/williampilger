@@ -11,6 +11,9 @@ apt-get install -y p7zip p7zip-full p7zip-rar
 apt-get install -y flatpack #evitar de usar flatpacks
 snap install homeserver
 flatpak install flathub com.github.micahflee.torbrowser-launcher #Tor Browser
+flatpak install flathub it.mijorus.gearlever #gerenciamento de AppImages
+flatpak install flathub com.github.tchx84.Flatseal # ferramenta avançada para gerenciar os Flatpacks
+gnome-extensions install --force gsconnect@andyholmes.github.io.zip
 
 # Geral-Basico - CODING
 apt-get install -y python3 python3-pip

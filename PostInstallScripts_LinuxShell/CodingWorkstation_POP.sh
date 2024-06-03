@@ -121,6 +121,9 @@ FLATPACK_PROGRAMS=(
 	com.usebottles.bottles
 	com.spotify.Client
 	com.github.wwmm.easyeffects
+	it.mijorus.gearlever #gerenciamento de AppImages
+	io.podman_desktop.PodmanDesktop # Like Docker Desktop
+	com.github.tchx84.Flatseal # ferramenta avançada para gerenciar os Flatpacks
 )
 for nome_do_programa in ${FLATPACK_PROGRAMS[@]}; do
 	flatpack_install $nome_do_programa
@@ -181,6 +184,9 @@ WantedBy=basic.target
   systemctl enable wol.service
 }
 setup_WakeOnLan
+
+# Gnome Extensions
+gnome-extensions install --force gsconnect@andyholmes.github.io.zip
 
 # SSH Github
 ssh-keygen -t ed25519 -C "GitHub - WilliamPilger - MICRO-02 - Escritório"

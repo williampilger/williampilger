@@ -135,6 +135,9 @@ FLATPACK_PROGRAMS=(
 	com.usebottles.bottles
 	com.spotify.Client
 	com.github.wwmm.easyeffects
+	it.mijorus.gearlever #gerenciamento de AppImages
+	io.podman_desktop.PodmanDesktop # Like Docker Desktop
+	com.github.tchx84.Flatseal # ferramenta avançada para gerenciar os Flatpacks
 )
 for nome_do_programa in ${FLATPACK_PROGRAMS[@]}; do
 	flatpack_install $nome_do_programa
@@ -164,6 +167,9 @@ done
 
 
 LOG '2212200913 - Start Custom instalations:'
+
+# Gnome Extensions
+gnome-extensions install --force gsconnect@andyholmes.github.io.zip
 
 
 # Discord (instalado via .deb pra ter compatibilidade com a captura de atividade)
