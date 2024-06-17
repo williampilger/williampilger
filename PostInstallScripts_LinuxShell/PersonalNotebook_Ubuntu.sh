@@ -80,6 +80,8 @@ APT_PROGRAMS=(
 	transmission
 	kdeconnect
 	gnupg2
+ 	guvcview
+  	cheese
 	# Codding
 	python3
 	python3-pip
