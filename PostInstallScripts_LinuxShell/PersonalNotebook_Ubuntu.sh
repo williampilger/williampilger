@@ -119,7 +119,7 @@ done
 
 
 LOG '2212200911 - Start Flatpack APPs instalation:'
-
+sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 FLATPACK_PROGRAMS=(
 	# Publicidade-Imagens-Edição
 	com.uploadedlobster.peek
