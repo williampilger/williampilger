@@ -3,7 +3,7 @@
 
 ### Fala, Tchê! 👋
 
-# William Pilger | Authenty | @pilgerw
+# William Pilger | Authenty
 
 <a href="https://www.instagram.com/pilgerw" target="_blank" style="text-decoration: none; color: inherit;">
     <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 5px;">
