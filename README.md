@@ -6,33 +6,15 @@
 # William Pilger | Authenty
 
 <a href="https://www.instagram.com/pilgerw" target="_blank" style="text-decoration: none; color: inherit;">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 5px;">
-    @pilgerw
+    <img src=".resources/insta_pilgerw.svg" alt="Instagram" style="height: 50px; vertical-align: middle; margin-right: 5px;">
 </a>
 
-
-<!--![My GitHub stats](https://github-readme-stats.vercel.app/api?username=williampilger&show_icons=true&theme=radical)-->
-<!--![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=williampilger&show_icons=true&theme=radical&layout=compact)-->
 
 
 #### Destaques da vez:
 - Pessoal/Personalização
    - [PostInstall Scripts - LinuxDistributions](PostInstallScripts_LinuxShell);
    - [PostInstall Scripts - Windows (Beta)](PostInstallScripts_Windows);
-   - [Tutoriais Variados (e bagunçados hehehe)](https://github.com/williampilger/tutoriais);
-   - [My Docker Images](https://github.com/williampilger/utilidades_gerais/tree/master/DockerImages);
-- Utilidades Gerais
-   - [Ferramenta de Sincronização de Diretórios - Windows](https://github.com/williampilger/DirSyncTool);
-   - [Ferramenta para Backup Automatizado do Github](https://github.com/williampilger/AutoGitCloneTool);
-   - [Wake-Up-On-LAN - Ligar Máquinas da Rede](https://github.com/williampilger/WOL.py);
-- Nossas Criações -> Authenty Team
-   - [Site Authenty - ReactTS](https://www.authenty.com.br/home);
-   - [Authenty Flexão - ReactJS](https://app.authenty.com.br/FlexaoSimples);
-   - [Authenty Piso - ReactTS](https://app.authenty.com.br/PisoDeConcreto);
-- Pequenas aplicações WEB
-   - [Lista de Compras - PHP - SEM AUTENTICAÇÃO](https://github.com/williampilger/utilidades_gerais/tree/master/ListaDeCompras_PHP);
-   - [Página de Contato - PHP - Para criar QR de contato para empresa](https://github.com/williampilger/utilidades_gerais/tree/master/pagina_contato_php);
-
 
 
 <p align="center">
