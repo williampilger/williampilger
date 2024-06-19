@@ -6,7 +6,7 @@
 # William Pilger | Authenty
 
 <a href="https://www.instagram.com/pilgerw" target="_blank" style="text-decoration: none; color: inherit;">
-    <img src=".resources/insta_pilgerw.svg" alt="Instagram" style="height: 50px; vertical-align: middle; margin-right: 5px;">
+    <img src=".resources/insta_pilgerw.svg" alt="Instagram" style="height: 40px; vertical-align: middle; margin-right: 5px;">
 </a>
 
 
