@@ -101,6 +101,7 @@ APT_PROGRAMS=(
 	inkscape
 	imagemagick
 	vlc
+ 	flameshot
 	# Dependencias VMware
 	gcc-6
 	gcc-6-multilib
@@ -142,7 +143,6 @@ SNAP_PROGRAMS=(
 	# Geral
 #	homeserver
 	brave
-	flameshot
 	spotify
 	# Coding
 	postman
@@ -151,7 +151,6 @@ SNAP_PROGRAMS=(
 	xournalpp
 	# Comunicação
 	telegram-desktop
-	whatsapp-electron #origem não verificada
 )
 for nome_do_programa in ${SNAP_PROGRAMS[@]}; do
 	snap_install $nome_do_programa
