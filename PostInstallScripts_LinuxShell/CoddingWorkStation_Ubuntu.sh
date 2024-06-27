@@ -102,6 +102,7 @@ APT_PROGRAMS=(
 	inkscape
 	imagemagick
 	vlc
+ 	flameshot
 )
 for nome_do_programa in ${APT_PROGRAMS[@]}; do
 	apt_install $nome_do_programa
@@ -115,7 +116,6 @@ FLATPACK_PROGRAMS=(
 	com.uploadedlobster.peek
 	com.github.maoschanz.drawing
 	io.github.lainsce.Colorway
-	org.flameshot.Flameshot
 	# Geral
 	com.usebottles.bottles
 	com.github.wwmm.easyeffects
