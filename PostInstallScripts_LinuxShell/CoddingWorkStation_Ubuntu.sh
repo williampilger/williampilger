@@ -174,8 +174,18 @@ rm discord.deb
 
 LOG '2212200931 - Start Other configurations:'
 
-# System Text Scalling
-gsettings set org.gnome.desktop.interface text-scaling-factor 0.8
+# Gnome COnfig
+gsettings set org.gnome.desktop.interface text-scaling-factor 0.8 # System Text Scalling
+gsettings set org.gnome.mutter edge-tiling false
+gsettings set org.gnome.mutter workspaces-only-on-primary false
+gsettings set org.gnome.shell.app-switcher current-workspace-only true
+gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 24
+gsettings set org.gnome.shell.extensions.dash-to-dock isolate-workspaces true
+gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts false
+gsettings set org.gnome.shell.extensions.dash-to-dock show-trash false
+gsettings set org.gnome.settings-daemon.plugins.media-keys terminal "['<Super>t']"
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-left "['<Control><Super>Left']"
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-right "['<Control><Super>Right']"
 
 
 
