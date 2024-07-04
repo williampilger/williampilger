@@ -174,8 +174,13 @@ rm discord.deb
 
 LOG '2212200931 - Start Other configurations:'
 
-# Gnome COnfig
+# Gnome COnfig (Para conferir, pode-se usar `dconf dump /` no terminal )
 gsettings set org.gnome.desktop.interface text-scaling-factor 0.8 # System Text Scalling
+gsettings set org.gnome.desktop.interface clock-show-weekday true
+gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+gsettings set org.gnome.desktop.interface gtk-theme 'Yaru-olive-dark'
+gsettings set org.gnome.desktop.interface icon-theme 'Yaru-olive'
+gsettings set org.gnome.desktop.calendar show-weekdate true
 gsettings set org.gnome.mutter edge-tiling false
 gsettings set org.gnome.mutter workspaces-only-on-primary false
 gsettings set org.gnome.shell.app-switcher current-workspace-only true
