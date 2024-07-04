@@ -191,6 +191,8 @@ gsettings set org.gnome.shell.extensions.dash-to-dock show-trash false
 gsettings set org.gnome.settings-daemon.plugins.media-keys terminal "['<Super>t']"
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-left "['<Control><Super>Left']"
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-right "['<Control><Super>Right']"
+gsettings set org.gnome.shell favorite-apps "['org.gnome.Nautilus.desktop', 'google-chrome.desktop']"
+
 
 # Atalhos personalizados de teclado
 gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "[\"/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/\", \"/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/\"]"
