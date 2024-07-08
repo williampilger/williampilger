@@ -77,12 +77,14 @@ APT_PROGRAMS=(
 	p7zip-full
 	p7zip-rar
 	gnome-software-plugin-flatpakt
+  	flatpak
 	transmission
 	kdeconnect
 	gnupg2
  	guvcview
   	cheese
-  	flatpak
+   	btrfs-progs # suporte ao sistema de arquivos BTRFS
+    	cryptsetup # suporte à criptografia de unidades
 	# Codding
 	python3
 	python3-pip
