@@ -104,6 +104,7 @@ APT_PROGRAMS=(
 	imagemagick
 	vlc
  	flameshot
+  	peek
 	# Dependencias VMware
 	gcc-6
 	gcc-6-multilib
@@ -125,7 +126,6 @@ LOG '2212200911 - Start Flatpack APPs instalation:'
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 FLATPACK_PROGRAMS=(
 	# Publicidade-Imagens-Edição
-	com.uploadedlobster.peek
 	com.github.maoschanz.drawing
 	io.github.lainsce.Colorway
 	# Geral
