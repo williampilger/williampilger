@@ -1,6 +1,6 @@
 #!/bin/bash
-## VERSÃO DO SISTEMA: Ubuntu Pro - 24.04 LTS
-## Latest Version: 2024-06-27 14:26
+## VERSÃO DO SISTEMA: Ubuntu - 24.04 LTS
+## Latest Version: 2024-07-08 10:40
 ## Statistics: Tris script takes more than 1 hour (how about 1:10)
 
 LOG(){
