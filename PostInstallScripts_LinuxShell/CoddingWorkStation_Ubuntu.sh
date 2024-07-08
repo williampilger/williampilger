@@ -105,6 +105,7 @@ APT_PROGRAMS=(
 	imagemagick
 	vlc
  	flameshot
+  	peek
 )
 for nome_do_programa in ${APT_PROGRAMS[@]}; do
 	apt_install $nome_do_programa
@@ -115,7 +116,6 @@ LOG '2212200911 - Start Flatpack APPs instalation:'
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 FLATPACK_PROGRAMS=(
 	# Publicidade-Imagens-Edição
-	com.uploadedlobster.peek
 	com.github.maoschanz.drawing
 	io.github.lainsce.Colorway
 	# Geral
