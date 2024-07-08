@@ -82,6 +82,8 @@ APT_PROGRAMS=(
 	gnupg2
  	guvcview
   	cheese
+   	btrfs-progs # suporte ao sistema de arquivos BTRFS
+    	cryptsetup # suporte à criptografia de unidades
 	# Codding
 	python3
 	python3-pip
@@ -188,13 +190,36 @@ LOG '2212200931 - Start Other configurations:'
 # System Text Scalling
 gsettings set org.gnome.desktop.interface text-scaling-factor 0.8
 
+# Gnome COnfig (Para conferir, pode-se usar `dconf dump /` no terminal )
+gsettings set org.gnome.desktop.interface text-scaling-factor 0.8 # System Text Scalling
+gsettings set org.gnome.desktop.interface clock-show-weekday true
+gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+gsettings set org.gnome.desktop.interface gtk-theme 'Yaru-olive-dark'
+gsettings set org.gnome.desktop.interface icon-theme 'Yaru-olive'
+gsettings set org.gnome.desktop.calendar show-weekdate true
+gsettings set org.gnome.mutter edge-tiling false
+gsettings set org.gnome.mutter workspaces-only-on-primary false
+gsettings set org.gnome.shell.app-switcher current-workspace-only true
+gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 24
+gsettings set org.gnome.shell.extensions.dash-to-dock isolate-workspaces true
+gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts false
+gsettings set org.gnome.shell.extensions.dash-to-dock show-trash false
+gsettings set org.gnome.settings-daemon.plugins.media-keys terminal "['<Super>t']"
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-left "['<Control><Super>Left']"
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-right "['<Control><Super>Right']"
+gsettings set org.gnome.shell favorite-apps "['org.gnome.Nautilus.desktop', 'google-chrome.desktop']"
 
-# SSH Github
-ssh-keygen -t ed25519 -C "GitHub - WilliamPilger - Notebook Acer Aspire 5"
-xclip -sel clip < ~/.ssh/id_ed25519.pub
-LOG "NEW SSH KEYPAIR GENERATED: $(cat ~/.ssh/id_ed25519.pub)"
-git config --global user.email "pilger.will@gmail.com"
-git config --global user.name "williampilger"
+
+# Atalhos personalizados de teclado
+gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "[\"/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/\", \"/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/\"]"
+# abrir o Nautilus
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name "Open Nautilus"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command "nautilus --new-window"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ binding "<Super>F"
+# abrir o monitor de recursos
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ name "Open System Monitor"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ command "gnome-system-monitor"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ binding "<Primary><Shift>Escape"
 
 
 LOG '2212200938 - Post-install finished.'
