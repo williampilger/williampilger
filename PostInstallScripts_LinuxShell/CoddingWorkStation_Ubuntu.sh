@@ -77,6 +77,8 @@ APT_PROGRAMS=(
 	p7zip-full
 	p7zip-rar
 	gnome-software-plugin-flatpakt
+ 	gnome-shell-extensions
+  	gnome-tweaks
   	flatpak
 	transmission
 	kdeconnect
@@ -172,6 +174,14 @@ wget -O discord.deb 'https://discord.com/api/download?platform=linux&format=deb'
 sudo dpkg -i discord.deb
 apt --fix-broken install -y
 rm discord.deb
+
+
+LOG '2407111129 - Start Gnome Extensions Instalation:'
+# ATENÇÃO: este script de terceiros pode não ser confiável... mas não existe uma forma "oficial" de fazer isso
+sudo wget -O /usr/local/bin/gnome-shell-extension-installer https://raw.githubusercontent.com/brunelli/gnome-shell-extension-installer/master/gnome-shell-extension-installer
+sudo chmod +x /usr/local/bin/gnome-shell-extension-installer
+gnome-shell-extension-installer 3733 # Instalando Tiling Assistant
+gnome-extensions enable tiling-assistant@leleat-on-github
 
 
 LOG '2212200931 - Start Other configurations:'
