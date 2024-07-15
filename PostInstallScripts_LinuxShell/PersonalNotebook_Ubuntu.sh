@@ -84,6 +84,7 @@ APT_PROGRAMS=(
   	cheese
    	btrfs-progs # suporte ao sistema de arquivos BTRFS
     	cryptsetup # suporte à criptografia de unidades
+     	blueman
 	# Codding
 	python3
 	python3-pip
