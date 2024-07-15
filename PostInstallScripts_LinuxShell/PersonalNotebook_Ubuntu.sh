@@ -187,8 +187,19 @@ rm discord.deb
 
 LOG '2212200931 - Start Other configurations:'
 
-# System Text Scalling
-gsettings set org.gnome.desktop.interface text-scaling-factor 0.8
+
+# Firewall
+sudo ufw enable
+sudo ufw allow 3389 #RDP
+sudo ufw allow 3390 #RDP viewonly
+sudo ufw allow from 192.168.0.0/24 to any port 5900 # VNC Local
+
+
+# Acesso SSH
+sudo systemctl start ssh
+sudo systemctl enable ssh
+sudo ufw allow ssh
+
 
 # Gnome COnfig (Para conferir, pode-se usar `dconf dump /` no terminal )
 gsettings set org.gnome.desktop.interface text-scaling-factor 0.8 # System Text Scalling
@@ -208,7 +219,13 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys terminal "['<Super>t'
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-left "['<Control><Super>Left']"
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-right "['<Control><Super>Right']"
 gsettings set org.gnome.shell favorite-apps "['org.gnome.Nautilus.desktop', 'google-chrome.desktop']"
-
+# Acesso Remoto
+gsettings set org.gnome.desktop.remote-desktop.rdp enable true
+gsettings set org.gnome.desktop.remote-desktop.rdp view-only false
+gsettings set org.gnome.desktop.remote-desktop.rdp negotiate-port true
+gsettings set org.gnome.desktop.remote-desktop.rdp screen-share-mode 'mirror-primary'
+# Outros Diversos
+gsettings set org.gnome.gedit.preferences.editor restore-session false
 
 # Atalhos personalizados de teclado
 gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "[\"/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/\", \"/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/\"]"
