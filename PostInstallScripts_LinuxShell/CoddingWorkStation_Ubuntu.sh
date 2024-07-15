@@ -86,6 +86,7 @@ APT_PROGRAMS=(
 	gnupg2
  	guvcview
   	cheese
+   	blueman
    	btrfs-progs # suporte ao sistema de arquivos BTRFS
     	cryptsetup # suporte à criptografia de unidades
 	# Codding
