@@ -4,6 +4,9 @@
 ## Latest Version: 2024-07-22 10:12
 ## Statistics: Tris script takes more than 1 hour (how about 1:10)
 
+## Execute diretamente usando:
+## bash -c "$(curl -fsSL https://raw.githubusercontent.com/williampilger/williampilger/main/PostInstallScripts_LinuxShell/CoddingWorkStation_Ubuntu.sh)"
+
 LOG(){
 	CONTENT=$1
 	echo $(date) - $CONTENT >> LOG.txt
