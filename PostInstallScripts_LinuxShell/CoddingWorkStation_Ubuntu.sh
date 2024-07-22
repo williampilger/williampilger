@@ -1,6 +1,7 @@
 #!/bin/bash
 ## VERSÃO DO SISTEMA: Ubuntu - 24.04 LTS
-## Latest Version: 2024-07-08 10:40
+## Hardware: DELL Inc. Vostro 3710 - 12th Gen Intel Core i7-12700 x 20 
+## Latest Version: 2024-07-22 10:12
 ## Statistics: Tris script takes more than 1 hour (how about 1:10)
 
 LOG(){
@@ -186,9 +187,9 @@ gnome-shell-extension-installer 3733 # Instalando Tiling Assistant
 gnome-extensions enable tiling-assistant@leleat-on-github
 
 
-LOG '2212200931 - Start Other configurations:'
 
 # Firewall
+LOG '202407221022 - Start Firewall configuration'
 sudo ufw enable
 sudo ufw allow 3389 #RDP
 sudo ufw allow 3390 #RDP viewonly
@@ -196,12 +197,14 @@ sudo ufw allow from 192.168.0.0/24 to any port 5900 # VNC Local
 
 
 # Acesso SSH
+LOG '202407221023 - Start SSH Access configuration'
 sudo systemctl start ssh
 sudo systemctl enable ssh
 sudo ufw allow ssh
 
 
 # Gnome COnfig (Para conferir, pode-se usar `dconf dump /` no terminal )
+LOG '202407221024 - Start Gnome configuration'
 gsettings set org.gnome.desktop.interface text-scaling-factor 0.8 # System Text Scalling
 gsettings set org.gnome.desktop.interface clock-show-weekday true
 gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
@@ -228,6 +231,7 @@ gsettings set org.gnome.desktop.remote-desktop.rdp screen-share-mode 'mirror-pri
 gsettings set org.gnome.gedit.preferences.editor restore-session false
 
 # Atalhos personalizados de teclado
+LOG '202407221025 - Start Keybinding configuration'
 gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "[\"/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/\", \"/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/\"]"
 # abrir o Nautilus
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name "Open Nautilus"
@@ -237,6 +241,35 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/or
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ name "Open System Monitor"
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ command "gnome-system-monitor"
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ binding "<Primary><Shift>Escape"
+
+
+# Wake-up-on-LAN
+LOG '202407221026 - Configuring Wake-Up-On-LAN'
+INTERFACE="enp1s0"
+sudo ethtool -s $INTERFACE wol g #isso só afeta para a inicialização atual, não é persistido. Abaixo fazendo a alteração que, de fatp, vai ficar
+sudo bash -c "cat > /etc/netplan/01-netcfg.yaml <<EOF
+network:
+  version: 2
+  ethernets:
+    $INTERFACE:
+      dhcp4: yes
+      wakeonlan: true
+EOF"
+sudo netplan apply
+sudo bash -c "cat > /etc/systemd/system/wol.service <<EOF
+[Unit]
+Description=Configure Wake-on-LAN
+
+[Service]
+ExecStart=/usr/sbin/ethtool -s $INTERFACE wol g
+
+[Install]
+WantedBy=multi-user.target
+EOF"
+sudo systemctl enable wol.service
+sudo systemctl start wol.service
+
+
 
 
 
