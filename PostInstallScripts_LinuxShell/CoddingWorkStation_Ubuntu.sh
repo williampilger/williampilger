@@ -242,6 +242,7 @@ gsettings set org.gnome.desktop.remote-desktop.rdp negotiate-port true
 gsettings set org.gnome.desktop.remote-desktop.rdp screen-share-mode 'mirror-primary'
 # Outros Diversos
 gsettings set org.gnome.gedit.preferences.editor restore-session false
+gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'suspend'
 
 # Atalhos personalizados de teclado
 LOG '202407221025 - Start Keybinding configuration'
