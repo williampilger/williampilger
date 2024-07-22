@@ -7,6 +7,14 @@
 ## Execute diretamente usando:
 ## bash -c "$(curl -fsSL https://raw.githubusercontent.com/williampilger/williampilger/main/PostInstallScripts_LinuxShell/CoddingWorkStation_Ubuntu.sh)"
 
+echo "============================================================"
+echo "            Welcome to the Ubuntu Post-Install Script       "
+echo "============================================================"
+echo "          Script: Codding Workstation Setup for Ubuntu      "
+echo "              Author: Williampilger                         "
+echo "============================================================"
+echo
+
 LOG(){
 	CONTENT=$1
 	echo $(date) - $CONTENT >> LOG.txt
