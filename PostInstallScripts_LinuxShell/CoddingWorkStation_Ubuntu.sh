@@ -1,19 +1,21 @@
 #!/bin/bash
-## VERSÃO DO SISTEMA: Ubuntu - 24.04 LTS
-## Hardware: DELL Inc. Vostro 3710 - 12th Gen Intel Core i7-12700 x 20 
-## Latest Version: 2024-07-22 10:12
-## Statistics: Tris script takes more than 1 hour (how about 1:10)
 
 ## Execute diretamente usando:
 ## bash -c "$(curl -fsSL https://raw.githubusercontent.com/williampilger/williampilger/main/PostInstallScripts_LinuxShell/CoddingWorkStation_Ubuntu.sh)"
 
-echo "============================================================"
-echo "            Welcome to the Ubuntu Post-Install Script       "
-echo "============================================================"
-echo "          Script: Codding Workstation Setup for Ubuntu      "
-echo "              Author: Williampilger                         "
-echo "============================================================"
-echo
+echo "
+============================================================
+            Welcome to the Ubuntu Post-Install Script       
+============================================================
+  Script: Codding Workstation Setup for Ubuntu
+  VERSÃO DO SISTEMA: Ubuntu - 24.04 LTS
+  Hardware: DELL Inc. Vostro 3710 - 12th Gen Intel Core i7-12700 x 20
+  Latest Version: 2024-07-22 10:12
+  Statistics: Tris script takes more than 1 hour (how about 1:10)
+              Author: Williampilger                         
+============================================================
+
+"
 
 LOG(){
 	CONTENT=$1
