@@ -10,8 +10,13 @@ apt-get upgrade -y
 sudo apt dist-upgrade -y
 
 # --------------------------------- Suporte a SSH -------------------------------------#
-apt-get install -y openssh-server
+apt install -y openssh-server
 service ssh start
+
+# ---------------------------- Ativar Descoberta de Rede-------------------------------#
+sudo apt install avahi-daemon
+sudo systemctl start avahi-daemon
+sudo systemctl enable avahi-daemon
 
 # ------------------------------ Ferramentas diversas ---------------------------------#
 apt-get install -y net-tools glances
