@@ -48,6 +48,7 @@ echo '''
     DocumentRoot /var/www/authentylocal
     ErrorLog ${APACHE_LOG_DIR}/error.log
     CustomLog ${APACHE_LOG_DIR}/access.log combined
+    AddDefaultCharset UTF-8
 </VirtualHost>
 ''' > /etc/apache2/sites-available/authentylocal.conf
 echo '''
@@ -61,6 +62,7 @@ echo '''
     SSLEngine on
     SSLCertificateKeyFile /etc/ssl/private/ubuntu.authentylocal.key
     SSLCertificateFile /etc/ssl/certs/ubuntu.authentylocal.crt
+    AddDefaultCharset UTF-8
 </VirtualHost>
 ''' > /etc/apache2/sites-available/authentylocal-ssl.conf
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/ubuntu.authentylocal.key -out /etc/ssl/certs/ubuntu.authentylocal.crt
@@ -101,7 +103,7 @@ local_umask=022
 /etc/init.d/vsftpd restart
 
 # ---------------------------------- PHP Server ---------------------------------------#
-apt install -y php libapache2-mod-php php-mysql
+apt install -y php libapache2-mod-php php-mysql php-mbstring php-curl composer php-xml
 
 # --------------------------------- MySQL Server --------------------------------------#
 apt -y install mysql-server
