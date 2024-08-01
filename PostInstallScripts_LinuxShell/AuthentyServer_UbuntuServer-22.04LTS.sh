@@ -1,33 +1,78 @@
 #!/bin/bash
-# ------------------------------------- INFO ------------------------------------------#
-# SISTEMA: Ubuntu Server 22.04 LTS
-# Post-install scrip para configurar servidor interno authenty
-# Deve ser executado como Admin -> sudo ./script.sh
 
-# ------------------------------------ Update -----------------------------------------#
-apt-get update
-apt-get upgrade -y
-sudo apt dist-upgrade -y
+## Execute diretamente usando:
+## sudo bash -c "$(curl -fsSL https://raw.githubusercontent.com/williampilger/williampilger/main/PostInstallScripts_LinuxShell/AuthentyServer_UbuntuServer-22.04LTS.sh)"
+
+echo "
+============================================================
+            Welcome to the Ubuntu Post-Install Script       
+============================================================
+  Script: Ubuntu Server - Apache + PHP
+  VERSÃO DO SISTEMA: Ubuntu Server 22.04 LTS
+  Hardware: Virtualbox VM - 2GB RAM + 2vCPU
+  Latest Version: 2024-07-31 10:27
+              Author: Williampilger                         
+============================================================
+"
+
+LOG(){
+	CONTENT=$1
+	echo $(date) - $CONTENT >> LOG.txt
+}
+
+deb_install(){
+	URL=$1
+	cd /home/$USER/Downloads
+	wget -O setup.deb "$URL"
+	dpkg -i setup.deb
+	if [ "$?" == 0 ]; then
+		LOG "	2212201205 - Successfully install .DEB '$URL'."
+	else
+		LOG "	2212201206 - Impossible install .DEB '$URL'."
+	fi
+	rm setup.deb
+}
+
+apt_install(){
+	SOFTWARE=$1
+	if ! dpkg -l | grep -q $SOFTWARE; then
+		apt install -y $SOFTWARE
+		if [ "$?" == 0 ]; then
+			LOG "	2212200855 - Successfully install SYSTEM $SOFTWARE."
+		else
+			LOG "	2212200853 - Impossible install SYSTEM $SOFTWARE."
+		fi
+	else
+		LOG "	2212200924 - Allready installed SYSTEM $SOFTWARE."
+	fi
+}
+
+LOG '2212200909 - Start Script. Updating...'
+
+apt update
+apt upgrade -y
+apt --fix-broken install
+apt dist-upgrade -y
 
 # --------------------------------- Suporte a SSH -------------------------------------#
 apt install -y openssh-server
 service ssh start
 
 # ---------------------------- Ativar Descoberta de Rede-------------------------------#
-sudo apt install avahi-daemon
-sudo systemctl start avahi-daemon
-sudo systemctl enable avahi-daemon
+apt install -y avahi-daemon
+systemctl start avahi-daemon
+systemctl enable avahi-daemon
 
 # ------------------------------ Ferramentas diversas ---------------------------------#
-apt-get install -y net-tools glances
+apt install -y net-tools glances
 
 # ------------------------------------ Apache -----------------------------------------#
-apt-get install -y apache2
+apt install -y apache2
 ufw allow 'Apache'
 ufw status
 
 mkdir /var/www/authentylocal
-sudo chown -R $USER:$USER /var/www/authentylocal
+chown -R $USER:$USER /var/www/authentylocal
 chmod -R 777 /var/www/authentylocal
 chown -R $USER:www-data /var/www/authentylocal
 echo '''
@@ -43,19 +88,26 @@ echo '''
 echo '''
 <VirtualHost *:80>
     ServerAdmin webmaster@localhost
-    ServerName www.authentylocal.com.br
-    ServerAlias www.authentylocal
+    ServerName authenty.local      
+    ServerAlias authenty.local
     DocumentRoot /var/www/authentylocal
     ErrorLog ${APACHE_LOG_DIR}/error.log
     CustomLog ${APACHE_LOG_DIR}/access.log combined
     AddDefaultCharset UTF-8
+
+    <Directory /var/www/authentylocal>
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
 </VirtualHost>
+
 ''' > /etc/apache2/sites-available/authentylocal.conf
 echo '''
 <VirtualHost *:443>
     ServerAdmin webmaster@localhost
-    ServerName www.authentylocal.com.br
-    ServerAlias www.authentylocal
+    ServerName authenty.local
+    ServerAlias authenty.local
     DocumentRoot /var/www/authentylocal
     ErrorLog ${APACHE_LOG_DIR}/error.log
     CustomLog ${APACHE_LOG_DIR}/access.log combined
@@ -66,17 +118,17 @@ echo '''
 </VirtualHost>
 ''' > /etc/apache2/sites-available/authentylocal-ssl.conf
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/ubuntu.authentylocal.key -out /etc/ssl/certs/ubuntu.authentylocal.crt
-a2ensite authentylocal.conf #Habilitar o arquivo novo como domínio. Para testar use: sudo apache2ctl configtest
+a2ensite authentylocal.conf #Habilitar o arquivo novo como domínio. Para testar use: apache2ctl configtest
 a2ensite authentylocal-ssl.conf
 a2dissite 000-default.conf #desabilita o antigo
 a2enmod ssl #ativar suporte à SSL
 systemctl restart apache2 #reiniciando o apache
 
 # ---------------------------------- FTP Server ---------------------------------------#
-apt-get -y install vsftpd
+apt -y install vsftpd
 systemctl start vsftpd
-sudo ufw allow 20/tcp
-sudo ufw allow 21/tcp
+ufw allow 20/tcp
+ufw allow 21/tcp
 mv /etc/vsftpd.conf /etc/vsftpd.conf.orig #cópia de segurança
 echo '''
 listen=NO
@@ -103,7 +155,7 @@ local_umask=022
 /etc/init.d/vsftpd restart
 
 # ---------------------------------- PHP Server ---------------------------------------#
-apt install -y php libapache2-mod-php php-mysql php-mbstring php-curl composer php-xml
+apt install -y php libapache2-mod-php php-mysql php-mysqli php-curl php-mbstring php-xml composer
 
 # --------------------------------- MySQL Server --------------------------------------#
 apt -y install mysql-server
