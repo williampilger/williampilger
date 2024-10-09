@@ -10,7 +10,7 @@ echo "
   Script: Codding Workstation Setup for Ubuntu
   VERSÃO DO SISTEMA: Ubuntu - 24.04 LTS
   Hardware: DELL Inc. Vostro 3710 - 12th Gen Intel Core i7-12700 x 20
-  Latest Version: 2024-07-22 10:12
+  Latest Version: 2024-10-09 09:44
   Statistics: Tris script takes more than 1 hour (how about 1:10)
               Author: Williampilger                         
 ============================================================
@@ -94,6 +94,7 @@ APT_PROGRAMS=(
 	gnome-software-plugin-flatpakt
  	gnome-shell-extensions
   	gnome-tweaks
+	gnome-network-displays
   	flatpak
 	transmission
 	kdeconnect
