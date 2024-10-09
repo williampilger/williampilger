@@ -1,6 +1,6 @@
 #!/bin/bash
 ## VERSÃO DO SISTEMA: Ubuntu Pro - 24.04 LTS
-## Latest Version: 2024-07-08 10:40
+## Latest Version: 2024-10-09 09:45
 ## Statistics: Tris script takes more than 1 hour (how about 1:10)
 
 LOG(){
@@ -77,6 +77,7 @@ APT_PROGRAMS=(
 	p7zip-full
 	p7zip-rar
 	gnome-software-plugin-flatpakt
+ 	gnome-network-displays
 	transmission
 	kdeconnect
 	gnupg2
