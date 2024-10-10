@@ -104,6 +104,7 @@ APT_PROGRAMS=(
    	blueman
    	btrfs-progs # suporte ao sistema de arquivos BTRFS
     	cryptsetup # suporte à criptografia de unidades
+     	bpytop # ferramenta quase gráfica de terminal para monitorar o sistema
 	# Codding
 	python3
 	python3-pip
