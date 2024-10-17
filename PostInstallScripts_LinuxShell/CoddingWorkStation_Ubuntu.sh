@@ -239,7 +239,7 @@ gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-left "['<Cont
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-right "['<Control><Super>Right']"
 gsettings set org.gnome.shell favorite-apps "['org.gnome.Nautilus.desktop', 'google-chrome.desktop']"
 # Acesso Remoto
-#gsettings set org.gnome.desktop.remote-desktop.rdp enable true
+gsettings set org.gnome.desktop.remote-desktop.rdp enable true
 gsettings set org.gnome.desktop.remote-desktop.rdp view-only false
 gsettings set org.gnome.desktop.remote-desktop.rdp negotiate-port true
 gsettings set org.gnome.desktop.remote-desktop.rdp screen-share-mode 'mirror-primary'
