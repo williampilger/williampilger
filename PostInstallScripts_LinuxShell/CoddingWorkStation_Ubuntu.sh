@@ -10,7 +10,7 @@ echo "
   Script: Codding Workstation Setup for Ubuntu
   VERSÃO DO SISTEMA: Ubuntu - 24.04 LTS
   Hardware: DELL Inc. Vostro 3710 - 12th Gen Intel Core i7-12700 x 20
-  Latest Version: 2024-10-09 09:44
+  Latest Version: 2024-10-17 01:24
   Statistics: Tris script takes more than 1 hour (how about 1:10)
               Author: Williampilger                         
 ============================================================
@@ -105,6 +105,7 @@ APT_PROGRAMS=(
    	btrfs-progs # suporte ao sistema de arquivos BTRFS
     	cryptsetup # suporte à criptografia de unidades
      	bpytop # ferramenta quase gráfica de terminal para monitorar o sistema
+      	openssh-server
 	# Codding
 	python3
 	python3-pip
