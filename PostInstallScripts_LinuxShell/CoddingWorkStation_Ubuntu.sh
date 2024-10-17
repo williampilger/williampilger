@@ -105,6 +105,10 @@ APT_PROGRAMS=(
    	btrfs-progs # suporte ao sistema de arquivos BTRFS
     	cryptsetup # suporte à criptografia de unidades
      	bpytop # ferramenta quase gráfica de terminal para monitorar o sistema
+      	# Remote Access
+       	xrdp
+	xfce4
+ 	xfce4-goodies
 	# Codding
 	python3
 	python3-pip
@@ -238,7 +242,7 @@ gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-left "['<Cont
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-right "['<Control><Super>Right']"
 gsettings set org.gnome.shell favorite-apps "['org.gnome.Nautilus.desktop', 'google-chrome.desktop']"
 # Acesso Remoto
-gsettings set org.gnome.desktop.remote-desktop.rdp enable true
+#gsettings set org.gnome.desktop.remote-desktop.rdp enable true
 gsettings set org.gnome.desktop.remote-desktop.rdp view-only false
 gsettings set org.gnome.desktop.remote-desktop.rdp negotiate-port true
 gsettings set org.gnome.desktop.remote-desktop.rdp screen-share-mode 'mirror-primary'
@@ -258,6 +262,13 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/or
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ command "gnome-system-monitor"
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ binding "<Primary><Shift>Escape"
 
+# Acesso Remoto RDP
+sudo adduser xrdp ssl-cert
+sudo systemctl enable xrdp
+sudo systemctl start xrdp
+echo xfce4-session >~/.xsession
+sudo sed -i.bak '/^test -x \/etc\/X11\/Xsession && exec \/etc\/X11\/Xsession || exec \/bin\/sh \/etc\/X11\/Xsession/d'
+echo "startxfce4" | sudo tee -a /etc/xrdp/startwm.sh
 
 # Wake-up-on-LAN
 LOG '202407221026 - Configuring Wake-Up-On-LAN'
