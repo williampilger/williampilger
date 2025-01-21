@@ -1,5 +1,8 @@
 #!/bin/bash
 
+## Execute diretamente usando:
+## bash -c "$(curl -fsSL https://raw.githubusercontent.com/williampilger/williampilger/main/PostInstallScripts_LinuxShell/CodingWorkstation_Fedora.sh)"
+
 echo "
 ============================================================
             Welcome to the Fedora Post-Install Script       
