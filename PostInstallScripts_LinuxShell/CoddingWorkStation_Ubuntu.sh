@@ -116,6 +116,7 @@ APT_PROGRAMS=(
   	docker-compose
    	nodejs
     	npm
+     	tilix
 	# OBS Studio
 	obs-studio
 	linux-headers-$(uname -r)
