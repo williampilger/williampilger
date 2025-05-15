@@ -8,10 +8,10 @@ echo "
             Welcome to the Ubuntu Post-Install Script       
 ============================================================
   Script: Codding Workstation Setup for Ubuntu
-  VERSÃO DO SISTEMA: Ubuntu - 24.04 LTS
+  VERSÃO DO SISTEMA: Ubuntu - 25.04 LTS
   Hardware: DELL Inc. Vostro 3710 - 12th Gen Intel Core i7-12700 x 20
-  Latest Version: 2025-02-26 19:13
-  Statistics: Tris script takes more than 1 hour (how about 1:10)
+  Latest Version: 2025-05-15 10:35
+  Statistics: Tris script takes less than 1 hour (depends on your internet connection, obviously)
               Author: Williampilger                         
 ============================================================
 
@@ -200,8 +200,6 @@ LOG '2407111129 - Start Gnome Extensions Instalation:'
 # ATENÇÃO: este script de terceiros pode não ser confiável... mas não existe uma forma "oficial" de fazer isso
 sudo wget -O /usr/local/bin/gnome-shell-extension-installer https://raw.githubusercontent.com/brunelli/gnome-shell-extension-installer/master/gnome-shell-extension-installer
 sudo chmod +x /usr/local/bin/gnome-shell-extension-installer
-gnome-shell-extension-installer 3733 # Instalando Tiling Assistant
-gnome-extensions enable tiling-assistant@leleat-on-github
 gnome-shell-extension-installer 6242 # Instalando Emogi Copy
 gnome-extensions enable emoji-copy@felipeftn
 
