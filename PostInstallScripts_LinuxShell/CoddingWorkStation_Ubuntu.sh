@@ -87,7 +87,6 @@ APT_PROGRAMS=(
 	samba
 	xclip
 	gdebi
-	remmina
 	p7zip
 	p7zip-full
 	p7zip-rar
@@ -158,6 +157,7 @@ SNAP_PROGRAMS=(
  	homeserver
 	brave
 	spotify
+ 	remmina
 	# Coding
 	postman
 	# Publicidade / Edição / Escritório
