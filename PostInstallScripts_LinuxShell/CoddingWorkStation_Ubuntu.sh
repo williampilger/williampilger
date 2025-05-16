@@ -110,6 +110,7 @@ APT_PROGRAMS=(
 	python3
 	python3-pip
 	git
+        git-lfs
 	curl
 	filezilla
  	docker.io
