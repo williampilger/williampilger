@@ -105,6 +105,7 @@ APT_PROGRAMS=(
     	cryptsetup # suporte à criptografia de unidades
      	bpytop # ferramenta quase gráfica de terminal para monitorar o sistema
       	openssh-server
+        rclone
 	# Codding
 	python3
 	python3-pip
