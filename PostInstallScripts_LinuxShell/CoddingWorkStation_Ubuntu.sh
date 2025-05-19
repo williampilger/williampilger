@@ -118,6 +118,7 @@ APT_PROGRAMS=(
    	nodejs
     	npm
      	tilix
+        httpie
 	# OBS Studio
 	obs-studio
 	linux-headers-$(uname -r)
