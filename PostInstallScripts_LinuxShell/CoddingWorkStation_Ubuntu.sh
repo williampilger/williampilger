@@ -190,6 +190,10 @@ LOG '2212200913 - Start Custom instalations:'
 # Gnome Extensions
 gnome-extensions install --force gsconnect@andyholmes.github.io.zip
 
+# 'Abrir com Code' no menu de contexto do Nautilus
+wget -qO- https://raw.githubusercontent.com/williampilger/code-nautilus/master/install.sh | bash
+
+
 
 # Discord (instalado via .deb pra ter compatibilidade com a captura de atividade)
 cd /home/$USER/Downloads
