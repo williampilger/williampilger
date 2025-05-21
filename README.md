@@ -25,3 +25,8 @@
         <img width="49%" src="https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=williampilger&theme=github_dark&hide_border=true" alt="Github Stats Graph"/>
     </a>
 </p>
+
+<a href="https://www.instagram.com/pilgerw" target="_blank" style="text-decoration: none; color: inherit;display:flex;align-items:center;gap:5px;">
+    <img src=".resources/authenty_team.jpg" alt="Instagram" style="height: 300px; vertical-align: middle; margin-right: 5px;">
+    <p><span>O tal do começo 🤩 <br/> Authenty Team</span></p>
+</a>
