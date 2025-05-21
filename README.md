@@ -26,7 +26,10 @@
     </a>
 </p>
 
-<span href="https://www.instagram.com/pilgerw" target="_blank" style="text-decoration: none; color: inherit;display:flex;align-items:center;gap:5px;">
-    <img src=".resources/authenty_team.jpg" alt="fotinho" style="height: 300px; vertical-align: middle; margin-right: 5px;border-radius:5px;">
-    <p><span>O tal do começo 🤩 <br/> Authenty Team</span></p>
-</span>
+---
+
+# Authenty Team
+O tal do começo 🤩
+
+<img src=".resources/authenty_team.jpg" alt="fotinho" style="height: 300px; vertical-align: middle; margin-right: 5px;border-radius:5px;">
+
