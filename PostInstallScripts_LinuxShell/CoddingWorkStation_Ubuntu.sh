@@ -10,7 +10,7 @@ echo "
   Script: Codding Workstation Setup for Ubuntu
   VERSÃO DO SISTEMA: Ubuntu - 25.04 LTS
   Hardware: DELL Inc. Vostro 3710 - 12th Gen Intel Core i7-12700 x 20
-  Latest Version: 2025-05-15 10:35
+  Latest Version: 2025-05-23 14:56
   Statistics: Tris script takes less than 1 hour (depends on your internet connection, obviously)
               Author: Williampilger                         
 ============================================================
