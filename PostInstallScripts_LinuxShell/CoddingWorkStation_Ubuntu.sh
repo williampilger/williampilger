@@ -97,7 +97,6 @@ APT_PROGRAMS=(
   	flatpak
 	transmission
 	kdeconnect
-	gnupg2
  	guvcview
   	cheese
    	blueman
@@ -119,6 +118,10 @@ APT_PROGRAMS=(
     	npm
      	tilix
         httpie
+	apt-transport-https
+ 	ca-certificates
+  	gnupg
+	gnupg2
 	# OBS Studio
 	obs-studio
 	linux-headers-$(uname -r)
@@ -188,13 +191,8 @@ done
 
 LOG '2212200913 - Start Custom instalations:'
 
-# Gnome Extensions
-gnome-extensions install --force gsconnect@andyholmes.github.io.zip
-
 # 'Abrir com Code' no menu de contexto do Nautilus
 wget -qO- https://raw.githubusercontent.com/williampilger/code-nautilus/master/install.sh | bash
-
-
 
 # Discord (instalado via .deb pra ter compatibilidade com a captura de atividade)
 cd /home/$USER/Downloads
@@ -203,6 +201,17 @@ sudo dpkg -i discord.deb
 apt --fix-broken install -y
 rm discord.deb
 
+# Pomodoro Timer
+wget -O ~/pomodoro 'https://github.com/williampilger/PomodoroTimer-Python/raw/refs/heads/main/dist/Pomodoro_Ubuntu_V2'
+chmod +x ~/pomodoro
+
+# Google CLI
+sudo curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg
+echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+sudo apt update && sudo apt install google-cloud-cli
+
+
+
 
 LOG '2407111129 - Start Gnome Extensions Instalation:'
 # ATENÇÃO: este script de terceiros pode não ser confiável... mas não existe uma forma "oficial" de fazer isso
@@ -210,7 +219,6 @@ sudo wget -O /usr/local/bin/gnome-shell-extension-installer https://raw.githubus
 sudo chmod +x /usr/local/bin/gnome-shell-extension-installer
 gnome-shell-extension-installer 6242 # Instalando Emogi Copy
 gnome-extensions enable emoji-copy@felipeftn
-
 
 
 # Firewall
