@@ -210,16 +210,12 @@ sudo curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dea
 echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
 sudo apt update && sudo apt install google-cloud-cli
 
-
-
-
 LOG '2407111129 - Start Gnome Extensions Instalation:'
 # ATENÇÃO: este script de terceiros pode não ser confiável... mas não existe uma forma "oficial" de fazer isso
 sudo wget -O /usr/local/bin/gnome-shell-extension-installer https://raw.githubusercontent.com/brunelli/gnome-shell-extension-installer/master/gnome-shell-extension-installer
 sudo chmod +x /usr/local/bin/gnome-shell-extension-installer
 gnome-shell-extension-installer 6242 # Instalando Emogi Copy
 gnome-extensions enable emoji-copy@felipeftn
-
 
 # Firewall
 LOG '202407221022 - Start Firewall configuration'
@@ -228,13 +224,15 @@ sudo ufw allow 3389 #RDP
 sudo ufw allow 3390 #RDP viewonly
 sudo ufw allow from 192.168.0.0/24 to any port 5900 # VNC Local
 
-
 # Acesso SSH
 LOG '202407221023 - Start SSH Access configuration'
 sudo systemctl start ssh
 sudo systemctl enable ssh
 sudo ufw allow ssh
 
+# Docker Configuration
+sudo usermod -aG docker $USER
+newgrp docker #aplica logo as alterações
 
 # Gnome COnfig (Para conferir, pode-se usar `dconf dump /` no terminal )
 LOG '202407221024 - Start Gnome configuration'
