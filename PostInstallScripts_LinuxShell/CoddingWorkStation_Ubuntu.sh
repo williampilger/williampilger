@@ -202,8 +202,7 @@ apt --fix-broken install -y
 rm discord.deb
 
 # Pomodoro Timer
-wget -O ~/pomodoro 'https://github.com/williampilger/PomodoroTimer-Python/raw/refs/heads/main/dist/Pomodoro_Ubuntu_V2'
-chmod +x ~/pomodoro
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/williampilger/PomodoroTimer-Python/main/install.sh)"
 
 # Google CLI
 sudo curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg
