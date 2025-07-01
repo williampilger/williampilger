@@ -10,7 +10,7 @@ echo "
   Script: Codding Workstation Setup for Ubuntu
   VERSÃO DO SISTEMA: Ubuntu - 25.04 LTS
   Hardware: DELL Inc. Vostro 3710 - 12th Gen Intel Core i7-12700 x 20
-  Latest Version: 2025-06-13 20:50
+  Latest Version: 2025-07-01 15:01
   Statistics: Tris script takes less than 1 hour (depends on your internet connection, obviously)
               Author: Williampilger                         
 ============================================================
@@ -131,8 +131,8 @@ APT_PROGRAMS=(
 	inkscape
 	imagemagick
 	vlc
- 	flameshot
   	peek
+   	#flameshot #não anda funcionando adequadamente. Estou usando a versão appimage, instalando depois
 )
 for nome_do_programa in ${APT_PROGRAMS[@]}; do
 	apt_install $nome_do_programa
