@@ -159,8 +159,8 @@ for nome_do_programa in ${FLATPACK_PROGRAMS[@]}; do
 done
 
 # Configuração adicional do OBS Studio (para permitir a camera virtual)
-flatpak override com.obsproject.Studio --enable-features=Camera
-flatpak override com.obsproject.Studio --filesystem=/dev/video0
+sudo modprobe v4l2loopback devices=1 video_nr=10 card_label="OBS-Camera" exclusive_caps=1
+sudo flatpak override com.obsproject.Studio --device=all --filesystem=/dev/video0 --filesystem=/dev/video10
 
 LOG '2212200912 - Start Snap APPs instalation:'
 
