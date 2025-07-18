@@ -128,7 +128,10 @@ APT_PROGRAMS=(
 	imagemagick
 	vlc
   	peek
-   	#flameshot #não anda funcionando adequadamente. Estou usando a versão appimage, instalando depois
+   	flameshot
+    	# Dependências OBS Studio
+     	linux-headers-$(uname -r)
+      	v4l2loopback-dkms
 )
 for nome_do_programa in ${APT_PROGRAMS[@]}; do
 	apt_install $nome_do_programa
