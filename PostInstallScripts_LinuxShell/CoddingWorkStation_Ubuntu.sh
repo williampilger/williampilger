@@ -122,10 +122,6 @@ APT_PROGRAMS=(
  	ca-certificates
   	gnupg
 	gnupg2
-	# OBS Studio
-	obs-studio
-	linux-headers-$(uname -r)
-	v4l2loopback-dkms
 	# Publicidade-Imagens-Edição
 	gimp
 	inkscape
@@ -145,6 +141,9 @@ FLATPACK_PROGRAMS=(
 	# Publicidade-Imagens-Edição
 	com.github.maoschanz.drawing
 	io.github.lainsce.Colorway
+ 	# OBS Studio (E tem configuação Extra no final)
+  	com.obsproject.Studio
+  	org.kde.Platform//5.15-21.08
 	# Geral
 	com.usebottles.bottles
 	com.github.wwmm.easyeffects
@@ -155,6 +154,10 @@ FLATPACK_PROGRAMS=(
 for nome_do_programa in ${FLATPACK_PROGRAMS[@]}; do
 	flatpack_install $nome_do_programa
 done
+
+# Configuração adicional do OBS Studio (para permitir a camera virtual)
+flatpak override com.obsproject.Studio --enable-features=Camera
+flatpak override com.obsproject.Studio --filesystem=/dev/video0
 
 LOG '2212200912 - Start Snap APPs instalation:'
 
