@@ -10,7 +10,7 @@ echo "
   Script: Codding Workstation Setup for Ubuntu
   VERSÃO DO SISTEMA: Ubuntu - 25.04 LTS
   Hardware: DELL Inc. Vostro 3710 - 12th Gen Intel Core i7-12700 x 20
-  Latest Version: 2025-07-18 09:01
+  Latest Version: 2025-07-31 13:36
   Statistics: Tris script takes less than 1 hour (depends on your internet connection, obviously)
               Author: Williampilger                         
 ============================================================
@@ -69,6 +69,17 @@ snap_install(){
 	fi
 }
 
+LOG '2507311331 - Add External Repositories'
+
+# Terraform
+wget -O - https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(grep -oP '(?<=UBUNTU_CODENAME=).*' /etc/os-release || lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+
+# Google CLI
+sudo curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg
+echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+
+
 LOG '2212200909 - Start Script. Updating...'
 
 sudo apt-get update
@@ -122,6 +133,8 @@ APT_PROGRAMS=(
  	ca-certificates
   	gnupg
 	gnupg2
+ 	terraform
+	google-cloud-cli
 	# Publicidade-Imagens-Edição
 	gimp
 	inkscape
@@ -190,31 +203,21 @@ DEB_PROGRAMS=(
 	'https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64'
 #	'https://cdn.insynchq.com/builds/linux/insync_3.8.4.50481-jammy_amd64.deb'
 	'https://download3.ebz.epson.net/dsc/f/03/00/16/21/77/211c32cd14db04ed7838001a6ec0276e5ffd7190/epson-inkjet-printer-escpr_1.8.6-1_amd64.deb'
+ 	'https://discord.com/api/download?platform=linux&format=deb'
 )
 for nome_do_programa in ${DEB_PROGRAMS[@]}; do
 	deb_install $nome_do_programa
 done
-
+apt --fix-broken install -y # necessário pro discord, por algum motivo desconhecido
 
 LOG '2212200913 - Start Custom instalations:'
 
 # 'Abrir com Code' no menu de contexto do Nautilus
 wget -qO- https://raw.githubusercontent.com/williampilger/code-nautilus/master/install.sh | bash
 
-# Discord (instalado via .deb pra ter compatibilidade com a captura de atividade)
-cd /home/$USER/Downloads
-wget -O discord.deb 'https://discord.com/api/download?platform=linux&format=deb'
-sudo dpkg -i discord.deb
-apt --fix-broken install -y
-rm discord.deb
-
 # Pomodoro Timer
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/williampilger/PomodoroTimer-Python/main/install.sh)"
 
-# Google CLI
-sudo curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg
-echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
-sudo apt update && sudo apt install google-cloud-cli
 
 LOG '2407111129 - Start Gnome Extensions Instalation:'
 # ATENÇÃO: este script de terceiros pode não ser confiável... mas não existe uma forma "oficial" de fazer isso
