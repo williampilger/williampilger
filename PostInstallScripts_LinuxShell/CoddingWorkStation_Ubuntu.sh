@@ -10,7 +10,7 @@ echo "
   Script: Codding Workstation Setup for Ubuntu
   VERSÃO DO SISTEMA: Ubuntu - 25.04 LTS
   Hardware: DELL Inc. Vostro 3710 - 12th Gen Intel Core i7-12700 x 20
-  Latest Version: 2025-07-31 13:36
+  Latest Version: 2025-08-19 11:12
   Statistics: Tris script takes less than 1 hour (depends on your internet connection, obviously)
               Author: Williampilger                         
 ============================================================
@@ -217,6 +217,9 @@ wget -qO- https://raw.githubusercontent.com/williampilger/code-nautilus/master/i
 
 # Pomodoro Timer
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/williampilger/PomodoroTimer-Python/main/install.sh)"
+
+# Instalando o LazyVim
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/williampilger/nvim/refs/heads/main/install.sh)"
 
 
 LOG '2407111129 - Start Gnome Extensions Instalation:'
