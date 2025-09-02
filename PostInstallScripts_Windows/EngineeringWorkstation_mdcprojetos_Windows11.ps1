@@ -15,18 +15,18 @@ if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
   exit
 }
 
+# Credencial de rede
+$target = "\\mdcserver"
+$cred = Get-Credential -Message "Informe usuário e senha da rede $target"
+cmdkey /add:$target /user:$($cred.UserName) /pass:$($cred.GetNetworkCredential().Password)
+Write-Host "Credencial adicionada para $target"
+
 # Conferir winget e atualizar fontes
 if (-not (Get-Command winget -ErrorAction SilentlyContinue)) {
   Write-Error "winget não encontrado. Abra a Microsoft Store e instale o 'App Installer' da Microsoft."
   exit 1
 }
 winget source update --accept-source-agreements | Out-Null
-
-# Credencial de rede
-$target = "\\mdcserver"
-$cred = Get-Credential -Message "Informe usuário e senha da rede $target"
-cmdkey /add:$target /user:$($cred.UserName) /pass:$($cred.GetNetworkCredential().Password)
-Write-Host "Credencial adicionada para $target"
 
 # Acesso SSH
 Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0
