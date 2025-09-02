@@ -1,7 +1,7 @@
 # CodingWorkstation_Windows11_winget.ps1
 # Instalação via winget com escopo de máquina
 
-# 1) Elevar para Admin, se necessário
+# Elevar para Admin, se necessário
 if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()
     ).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
   Write-Host "Elevando para Administrador..."
@@ -10,16 +10,20 @@ if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
   exit
 }
 
-# 2) Conferir winget
+# Conferir winget e atualizar fontes
 if (-not (Get-Command winget -ErrorAction SilentlyContinue)) {
   Write-Error "winget não encontrado. Abra a Microsoft Store e instale o 'App Installer' da Microsoft."
   exit 1
 }
-
-# 3) Atualizar fontes do winget
 winget source update --accept-source-agreements | Out-Null
 
-# Wrapper para instalar com padrão de máquina
+# Credencial de rede
+$target = "\\mdcserver"
+$cred = Get-Credential -Message "Informe usuário e senha da rede $target"
+cmdkey /add:$target /user:$($cred.UserName) /pass:$($cred.GetNetworkCredential().Password)
+Write-Host "Credencial adicionada para $target"
+
+# Instalação via winget
 function Install-Winget {
   param(
     [Parameter(Mandatory=$true)][string]$Id,
@@ -40,9 +44,8 @@ function Install-Winget {
   if ($Override) { $base += @('--override', $Override) }
   winget @base
 }
-
 $packages = @(
-  # Essenciais
+  # Base
   @{ Id = 'Microsoft.PowerShell' }
   @{ Id = '7zip.7zip' }
   @{ Id = 'Google.Chrome' }
@@ -57,7 +60,6 @@ $packages = @(
   @{ Id = 'ONLYOFFICE.DesktopEditors' }
   
 )
-
 foreach ($p in $packages) {
   try {
     Install-Winget -Id $p.Id -Source ($p.Source) -Override ($p.Override)
@@ -65,8 +67,7 @@ foreach ($p in $packages) {
     Write-Warning "Falhou: $($p.Id) Detalhe: $($_.Exception.Message)"
   }
 }
-
-# 6) Upgrade final de tudo no escopo de máquina
 winget upgrade --all --include-unknown --scope machine --accept-package-agreements --accept-source-agreements --silent --disable-interactivity
+
 
 Write-Host "`nConcluído."
