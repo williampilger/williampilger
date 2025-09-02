@@ -1,5 +1,10 @@
 # CodingWorkstation_Windows11_winget.ps1
 # Instalação via winget com escopo de máquina
+#
+# Execute direto no Executar com:
+#  powershell -NoProfile -ExecutionPolicy Bypass -Command "Invoke-Expression (Invoke-WebRequest -UseBasicParsing 'https://raw.githubusercontent.com/williampilger/williampilger/refs/heads/main/PostInstallScripts_Windows/EngineeringWorkstation_mdcprojetos_Windows11.ps1').Content"
+#
+# Versão Atualizada em 2025-09-02 11:17:15
 
 # Elevar para Admin, se necessário
 if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()
