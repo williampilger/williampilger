@@ -2,6 +2,8 @@
 #
 # ESTE É UM SCRIPT COMPLEMENTAR!!!
 # 
+# Execute diretamente (no CMD ou powershell COMO ADMIN) com o comando abaixo:
+#   powershell -ExecutionPolicy Bypass -Command "Invoke-Expression (Invoke-WebRequest -UseBasicParsing 'https://raw.githubusercontent.com/williampilger/williampilger/refs/heads/main/PostInstallScripts_Windows/aux_GeneralConfig_Windows11.ps1').Content"
 
 # ========== Helpers ==========
 function Test-Admin {
