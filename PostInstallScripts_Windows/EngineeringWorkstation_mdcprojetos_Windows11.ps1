@@ -4,13 +4,7 @@
 # Execute direto (no terminal, COMO ADMIN) com:
 #  powershell -NoProfile -ExecutionPolicy Bypass -Command "Invoke-Expression (Invoke-WebRequest -UseBasicParsing 'https://raw.githubusercontent.com/williampilger/williampilger/refs/heads/main/PostInstallScripts_Windows/EngineeringWorkstation_mdcprojetos_Windows11.ps1').Content"
 #
-# Versão Atualizada em 2025-09-02 16:50:49
-
-# Credencial de rede
-$target = "\\mdcserver"
-$cred = Get-Credential -Message "Informe usuário e senha da rede $target"
-cmdkey /add:$target /user:$($cred.UserName) /pass:$($cred.GetNetworkCredential().Password)
-Write-Host "Credencial adicionada para $target"
+# Versão Atualizada em 2025-09-04 11:57:03
 
 # Acesso SSH
 Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0
