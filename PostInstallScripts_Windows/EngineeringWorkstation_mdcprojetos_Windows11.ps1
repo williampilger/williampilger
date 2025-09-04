@@ -74,4 +74,7 @@ $Shortcut.Description = "Executa clear_temp.pyw no logon (todos os usuários)"
 $Shortcut.WindowStyle = 7
 $Shortcut.Save()
 
+Write-Host "Executando Script de configuração auxiliar"
+powershell -ExecutionPolicy Bypass -Command "Invoke-Expression (Invoke-WebRequest -UseBasicParsing 'https://raw.githubusercontent.com/williampilger/williampilger/refs/heads/main/PostInstallScripts_Windows/aux_GeneralConfig_Windows11.ps1').Content"
+
 Write-Host "`nConcluído."
