@@ -6,6 +6,13 @@
 #
 # Versão Atualizada em 2025-09-04 11:57:03
 
+# Credencial de Rede
+$User = Read-Host "Digite o usuário"
+$Pass = Read-Host "Digite a senha" -AsSecureString
+$BSTR = [System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($Pass)
+$PlainPass = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto($BSTR)
+cmdkey /add:mdcserver /user:$User /pass:$PlainPass
+
 # Acesso SSH
 Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0
 Set-Service -Name sshd -StartupType 'Automatic'
