@@ -63,18 +63,24 @@ Set-REG "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" "Sho
 Set-REG "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" "AppsUseLightTheme" 0
 Set-REG "HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" "SystemUsesLightTheme" 0
 
-# ========== 6) Chrome como padrão (melhor esforço) ==========
-# Observação: HTTP/HTTPS exigem hash de segurança do Windows 11. Sem ferramenta externa, a troca completa pode não aplicar.
-# O bloco abaixo ajusta extensões de arquivo mais comuns para o Chrome se ele estiver instalado.
+# ========== 6) Chrome como padrão (melhor esforço, sem GUI) ===
 $ChromePath = "${env:ProgramFiles}\Google\Chrome\Application\chrome.exe"
-if (-not (Test-Path $ChromePath)) { $ChromePath = "${env:ProgramFiles(x86)}\Google\Chrome\Application\chrome.exe" }
+if (-not (Test-Path $ChromePath)) {
+  $ChromePath = "${env:ProgramFiles(x86)}\Google\Chrome\Application\chrome.exe"
+}
+
 if (Test-Path $ChromePath) {
-  $cmd = "$ChromePath -- ""`"%1`"""
-  cmd /c assoc .htm=ChromeHTML    | Out-Null
-  cmd /c assoc .html=ChromeHTML   | Out-Null
-  cmd /c ftype ChromeHTML="$ChromePath" -- "%%1" | Out-Null
-  # Tentativa amigável de pedir ao Chrome para se tornar padrão; em sessões sem GUI pode não surtir efeito.
-  Start-Process -FilePath $ChromePath -ArgumentList "--make-default-browser" -WindowStyle Hidden -ErrorAction SilentlyContinue
+  # 1) Associa as extensões a um ProgID "ChromeHTML"
+  cmd.exe /c 'assoc .htm=ChromeHTML'  | Out-Null
+  cmd.exe /c 'assoc .html=ChromeHTML' | Out-Null
+
+  # 2) Define o comando de abertura do ProgID
+  $openCmd  = ('"{0}" -- "%1"' -f $ChromePath)
+  $ftypeCmd = ('ftype ChromeHTML={0}' -f $openCmd)
+  cmd.exe /c $ftypeCmd | Out-Null
+
+  # 3) Tenta pedir ao Chrome para se tornar o padrão (pode não surtir efeito sem GUI)
+  Start-Process -FilePath $ChromePath -ArgumentList '--make-default-browser' -WindowStyle Hidden -ErrorAction SilentlyContinue
 }
 
 # ========== 7) Explorer abre em “Este Computador” e mostrar extensões ==========
