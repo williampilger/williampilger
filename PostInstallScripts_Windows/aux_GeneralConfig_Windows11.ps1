@@ -1,5 +1,6 @@
 # Requer: Windows 11. Execute preferencialmente como Administrador.
 #
+# ⚠️ Criado pelo ChatGPT e não revisado! Não está funcionando completamente.
 # ESTE É UM SCRIPT COMPLEMENTAR!!!
 # 
 # Execute diretamente (no CMD ou powershell COMO ADMIN) com o comando abaixo:
