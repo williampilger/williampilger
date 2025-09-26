@@ -10,7 +10,7 @@ echo "
   Script: Codding Workstation Setup for Ubuntu
   VERSÃO DO SISTEMA: Ubuntu - 25.04 LTS
   Hardware: DELL Inc. Vostro 3710 - 12th Gen Intel Core i7-12700 x 20
-  Latest Version: 2025-08-19 11:12
+  Latest Version: 2025-09-26 14:43
   Statistics: Tris script takes less than 1 hour (depends on your internet connection, obviously)
               Author: Williampilger                         
 ============================================================
@@ -209,6 +209,10 @@ for nome_do_programa in ${DEB_PROGRAMS[@]}; do
 	deb_install $nome_do_programa
 done
 apt --fix-broken install -y # necessário pro discord, por algum motivo desconhecido
+
+LOG '250926144301 - Start Drivers auto-install:'
+
+sudo ubuntu-drivers autoinstall
 
 LOG '2212200913 - Start Custom instalations:'
 
