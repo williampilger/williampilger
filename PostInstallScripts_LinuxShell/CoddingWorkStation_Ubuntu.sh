@@ -10,7 +10,7 @@ echo "
   Script: Codding Workstation Setup for Ubuntu
   VERSÃO DO SISTEMA: Ubuntu - 25.04 LTS
   Hardware: DELL Inc. Vostro 3710 - 12th Gen Intel Core i7-12700 x 20
-  Latest Version: 2025-09-26 14:43
+  Latest Version: 2025-09-26 15:28
   Statistics: Tris script takes less than 1 hour (depends on your internet connection, obviously)
               Author: Williampilger                         
 ============================================================
@@ -233,18 +233,20 @@ sudo chmod +x /usr/local/bin/gnome-shell-extension-installer
 gnome-shell-extension-installer 6242 # Instalando Emogi Copy
 gnome-extensions enable emoji-copy@felipeftn
 
-# Firewall
-LOG '202407221022 - Start Firewall configuration'
-sudo ufw enable
-sudo ufw allow 3389 #RDP
-sudo ufw allow 3390 #RDP viewonly
-sudo ufw allow from 192.168.0.0/24 to any port 5900 # VNC Local
-
 # Acesso SSH
 LOG '202407221023 - Start SSH Access configuration'
 sudo systemctl start ssh
 sudo systemctl enable ssh
+
+# Firewall
+LOG '202407221022 - Start Firewall configuration'
 sudo ufw allow ssh
+sudo ufw allow 3000 # Normalmente usada para testar apps na rede local
+sudo ufw allow 8080 # Normalmente usada para testar apps na rede local
+sudo ufw allow 3389 #RDP
+sudo ufw allow 3390 #RDP viewonly
+sudo ufw allow from 192.168.0.0/24 to any port 5900 # VNC Local
+sudo ufw enable
 
 # Docker Configuration
 sudo usermod -aG docker $USER
