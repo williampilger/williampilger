@@ -15,6 +15,8 @@ echo "
 ============================================================
 "
 
+MACHINE_HOSTNAME='authenty'
+
 LOG(){
 	CONTENT=$1
 	echo $(date) - $CONTENT >> LOG.txt
@@ -76,6 +78,14 @@ done
 LOG '202407221022 - Start Firewall configuration'
 sudo ufw allow ssh
 sudo ufw allow from 192.168.0.0/24 to any port 5900 # VNC Local
+sudo ufw allow 3000 # Normalmente usada para testar apps
+sudo ufw allow 8080 # Normalmente usada para testar apps
+sudo ufw allow 80 # HTTP
+sudo ufw allow 443 # HTTPS
+sudo ufw allow 3306 # MySQL/MariaDB
+sudo ufw allow 5432 # PostgreSQL
+sudo ufw allow 27017 # MongoDB
+sudo ufw allow 6379 # Redis
 sudo ufw enable
 
 # --------------------------------- Suporte a SSH -------------------------------------#
@@ -85,6 +95,7 @@ sudo systemctl enable ssh
 
 # ---------------------------- Ativar Descoberta de Rede-------------------------------#
 LOG '202510081838 - Start Network Config'
+sudo hostnamectl set-hostname $MACHINE_HOSTNAME
 apt_install avahi-daemon
 systemctl start avahi-daemon
 systemctl enable avahi-daemon
