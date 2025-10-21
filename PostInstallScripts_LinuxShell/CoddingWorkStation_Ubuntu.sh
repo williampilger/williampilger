@@ -240,12 +240,14 @@ sudo systemctl enable ssh
 
 # Firewall
 LOG '202407221022 - Start Firewall configuration'
-sudo ufw allow ssh
-sudo ufw allow 3000 # Normalmente usada para testar apps na rede local
-sudo ufw allow 8080 # Normalmente usada para testar apps na rede local
-sudo ufw allow 3389 #RDP
-sudo ufw allow 3390 #RDP viewonly
-sudo ufw allow from 192.168.0.0/24 to any port 5900 # VNC Local
+sudo ufw allow from 192.168.0.0/24 to any port 22 proto tcp
+sudo ufw allow from 192.168.0.0/24 to any port 80 proto tcp # HTTP
+sudo ufw allow from 192.168.0.0/24 to any port 443 proto tcp # HTTPS
+sudo ufw allow from 192.168.0.0/24 to any port 3389 proto tcp # RDP
+sudo ufw allow from 192.168.0.0/24 to any port 3390 proto tcp # VNC Viewonly
+sudo ufw allow from 192.168.0.0/24 to any port 5900 proto tcp # VNC
+sudo ufw allow from 192.168.0.0/24 to any port 3000:3010 proto tcp # APPS tests
+sudo ufw allow from 192.168.0.0/24 to any port 8080 proto tcp # APPS tests
 sudo ufw enable
 
 # Docker Configuration
