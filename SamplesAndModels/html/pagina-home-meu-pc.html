@@ -117,7 +117,18 @@
 						</div>
                         
                         <!-- Serviços dinâmicos serão inseridos aqui -->
-						<div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4" id="dynamic-services"></div>
+						<div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4" id="dynamic-services">
+							<!-- Loading inicial -->
+							<div class="col-span-full flex items-center justify-center py-8">
+								<div class="flex items-center gap-3">
+									<svg class="animate-spin h-5 w-5 text-rose-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+										<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+										<path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+									</svg>
+									<span class="text-sm text-gray-600">Verificando serviços disponíveis...</span>
+								</div>
+							</div>
+						</div>
 					</div>
 
 					<!-- Gráficos de Desempenho -->
@@ -229,8 +240,17 @@
 			const NETDATA_URL = 'http://authentylocal.com.br:19999';
 			const BASE_URL = 'http://authentylocal.com.br';
 			
-			// Portas a serem verificadas
-			const PORTS_TO_CHECK = [8080, 3000, 3001, 5500, 5501];
+			// Serviços a serem verificados
+			// Formato: 'url' ou { url: 'url', name: 'nome' }
+			// URL pode ser: 'host:porta', 'http://host:porta', ou apenas 'porta' para usar BASE_URL
+			const SERVICES_TO_CHECK = [
+				{ url: 'http://authentylocal.com.br:8080', name: 'MICRO-08 - William' },
+				{ url: 'http://authentylocal.com.br:3000', name: 'MICRO-08 - William' },
+				{ url: 'http://micro-10.local:3000', name: 'MICRO-10 - Diego' },
+				'http://authentylocal.com.br:3001',
+				{ url: '5500', name: 'MICRO-08 - Live Server 5500' }, // Usa BASE_URL quando apenas a porta é informada
+				'5501'
+			];
 			
 			// Cores para os cards de serviço
 			const SERVICE_COLORS = [
@@ -363,10 +383,23 @@
 				}
 			}
 
-			// Função para verificar se uma porta está ativa
-			async function checkPort(port) {
+			// Função para normalizar o serviço (retorna a URL completa)
+			function normalizeService(service) {
+				// Se for apenas um número, trata como porta e usa BASE_URL
+				if (/^\d+$/.test(service)) {
+					return `${BASE_URL}:${service}`;
+				}
+				// Se não começar com http, adiciona http://
+				if (!service.startsWith('http://') && !service.startsWith('https://')) {
+					return `http://${service}`;
+				}
+				return service;
+			}
+			
+			// Função para verificar se um serviço está ativo
+			async function checkService(serviceUrl) {
 				try {
-					const response = await fetch(`${BASE_URL}:${port}`, { 
+					const response = await fetch(serviceUrl, { 
 						method: 'HEAD',
 						mode: 'no-cors', // Permite requisições cross-origin
 						cache: 'no-cache'
@@ -390,15 +423,15 @@
 							// Erro pode significar que a porta está aberta mas não retorna imagem
 							resolve(true);
 						};
-						img.src = `${BASE_URL}:${port}/favicon.ico?${Date.now()}`;
+						img.src = `${serviceUrl}/favicon.ico?${Date.now()}`;
 					});
 				}
 			}
 			
-			// Função para obter o nome do serviço baseado na porta
-			async function getServiceName(port) {
+			// Função para obter o nome do serviço
+			async function getServiceName(serviceUrl) {
 				try {
-					const response = await fetch(`${BASE_URL}:${port}`, { 
+					const response = await fetch(serviceUrl, { 
 						method: 'GET',
 						mode: 'cors',
 						cache: 'no-cache'
@@ -415,7 +448,13 @@
                     return false;
 				}
 				
-				return `Serviço na porta ${port}`;
+				// Extrair host e porta da URL para exibição
+				try {
+					const url = new URL(serviceUrl);
+					return `Serviço em ${url.host}`;
+				} catch {
+					return `Serviço disponível`;
+				}
 			}
 			
 			// Função para renderizar serviços dinâmicos
@@ -423,25 +462,72 @@
 				const container = document.getElementById('dynamic-services');
 				if (!container) return;
 				
+				// Mostrar loading
+				container.innerHTML = `
+					<div class="col-span-full flex items-center justify-center py-8">
+						<div class="flex items-center gap-3">
+							<svg class="animate-spin h-5 w-5 text-rose-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+								<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+								<path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+							</svg>
+							<span class="text-sm text-gray-600">Verificando serviços disponíveis...</span>
+						</div>
+					</div>
+				`;
+				
 				const activeServices = [];
 				
-				// Verificar todas as portas
-				for (let i = 0; i < PORTS_TO_CHECK.length; i++) {
-					const port = PORTS_TO_CHECK[i];
-					const isActive = await checkPort(port);
+				// Verificar todos os serviços
+				for (let i = 0; i < SERVICES_TO_CHECK.length; i++) {
+					const service = SERVICES_TO_CHECK[i];
+					
+					// Suporte para string ou objeto { url, name }
+					const serviceConfig = typeof service === 'string' ? { url: service } : service;
+					const serviceUrl = normalizeService(serviceConfig.url);
+					const customName = serviceConfig.name || null;
+					
+					const isActive = await checkService(serviceUrl);
 					
 					if (isActive) {
-						const serviceName = await getServiceName(port);
+						const serviceName = await getServiceName(serviceUrl);
                         if(serviceName){
                             const color = SERVICE_COLORS[i % SERVICE_COLORS.length];
-                            activeServices.push({ port, serviceName, color });
+                            activeServices.push({ 
+								url: serviceUrl, 
+								serviceName, 
+								customName,
+								color 
+							});
                         }
 					}
 				}
 				
 				// Renderizar apenas os serviços ativos (não exibe nada se não houver serviços)
-				container.innerHTML = activeServices.map(service => `
-					<a href="${BASE_URL}:${service.port}" target="_blank" class="p-3 sm:p-4 border-2 border-gray-200 rounded-lg ${service.color.hover} transition-all text-left block">
+				if (activeServices.length === 0) {
+					container.innerHTML = `
+						<div class="col-span-full text-center py-8 text-sm text-gray-500">
+							Nenhum serviço adicional disponível no momento
+						</div>
+					`;
+					return;
+				}
+				
+				container.innerHTML = activeServices.map(service => {
+					// Usar nome customizado se fornecido, senão extrair da URL
+					let displayInfo = '';
+					if (service.customName) {
+						displayInfo = service.customName;
+					} else {
+						try {
+							const url = new URL(service.url);
+							displayInfo = url.host;
+						} catch {
+							displayInfo = service.url;
+						}
+					}
+					
+					return `
+					<a href="${service.url}" target="_blank" class="p-3 sm:p-4 border-2 border-gray-200 rounded-lg ${service.color.hover} transition-all text-left block">
 						<div class="flex items-center gap-2 sm:gap-3">
 							<div class="w-8 h-8 sm:w-10 sm:h-10 ${service.color.bg} rounded-lg flex items-center justify-center flex-shrink-0">
 								<svg class="w-4 h-4 sm:w-5 sm:h-5 ${service.color.text}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -450,11 +536,12 @@
 							</div>
 							<div class="min-w-0">
 								<p class="font-semibold text-gray-800 text-sm sm:text-base">${service.serviceName}</p>
-								<p class="text-xs text-gray-500 hidden sm:block">Porta ${service.port}</p>
+								<p class="text-xs text-gray-500 hidden sm:block">${displayInfo}</p>
 							</div>
 						</div>
 					</a>
-				`).join('');
+				`;
+				}).join('');
 			}
 			
 			// Carregar charts disponíveis e depois atualizar métricas
