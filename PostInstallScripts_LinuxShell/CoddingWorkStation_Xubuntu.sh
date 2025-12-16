@@ -256,6 +256,8 @@ sudo systemctl enable wol.service
 sudo systemctl start wol.service
 
 
+LOG '20251216155505 - Configurações gerais do sistema'
+sudo journalctl --vacuum-size=500M #limitando os LOGs do sistema a 500MB
 
 
 
