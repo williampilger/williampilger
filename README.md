@@ -56,9 +56,15 @@ Experiência com:
 
 ## Destaques aqui no GitHub
 
-- **Pessoal / Personalização**
-  - [PostInstall Scripts - Linux Distributions](PostInstallScripts_LinuxShell)  
-  - [PostInstall Scripts - Windows (Beta)](PostInstallScripts_Windows)
+| Projeto | Repositório | Aplicação |
+|---------|-------------|-----------|
+| **PostInstall Scripts** | [williampilger](https://github.com/williampilger/williampilger) | - |
+| **Code Nautilus** | [code-nautilus](https://github.com/williampilger/code-nautilus) | - |
+| **Pomodoro Timer** | [PomodoroTimer-Python](https://github.com/williampilger/PomodoroTimer-Python) | - |
+| **LazyVim Config** | [nvim](https://github.com/williampilger/nvim) | - |
+| **Authenty Piso** | 🔒 Privado | [app.authenty.com.br/PisoDeConcreto](https://app.authenty.com.br/PisoDeConcreto) |
+| **Authenty Precificação** | 🔒 Privado | [precificacao.authenty.com.br](https://precificacao.authenty.com.br) |
+| **Authenty Site** | 🔒 Privado | [authenty.com.br](https://authenty.com.br) |
 
 Outros repositórios incluem ferramentas para produtividade, automação, utilitários gerais e experimentos em diferentes linguagens e tecnologias.
 
@@ -81,13 +87,13 @@ Outros repositórios incluem ferramentas para produtividade, automação, utilit
 
 <a href="https://www.linkedin.com/in/william-pilger-3a076ba6" target="_blank" style="text-decoration: none; color: inherit;">
   <img src=".resources/linkedin_icon.svg" alt="LinkedIn" style="height: 30px; vertical-align: middle; margin-right: 8px;">
-  William Pilger
 </a>
 &nbsp;&nbsp;&nbsp;
 <a href="https://www.instagram.com/pilgerw" target="_blank" style="text-decoration: none; color: inherit;">
   <img src=".resources/insta_pilgerw.svg" alt="Instagram" style="height: 30px; vertical-align: middle;">
 </a>
----
+
+
 
 ## Authenty Team
 
