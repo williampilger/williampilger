@@ -97,7 +97,7 @@ Outros repositórios incluem ferramentas para produtividade, automação, utilit
 
 ## Authenty Team
 
-O tal do começo 🤩  
+O tal do começo 🤩  - 04/10/2021
 <img src=".resources/authenty_team.jpg" alt="fotinho" style="height: 300px; vertical-align: middle; margin-right: 5px; border-radius: 5px;">
 <br>
 Orgulho de fazer parte do time que busca facilitar e melhorar a engenharia com tecnologia e educação.
