@@ -174,6 +174,8 @@ SNAP_PROGRAMS=(
 	# Geral
  	homeserver
  	remmina
+	# Edição
+	losslesscut
 )
 for nome_do_programa in ${SNAP_PROGRAMS[@]}; do
 	snap_install $nome_do_programa
