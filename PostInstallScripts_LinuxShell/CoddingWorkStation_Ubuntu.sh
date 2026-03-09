@@ -189,6 +189,7 @@ SNAP_PROGRAMS=(
 	# Publicidade / Edição / Escritório
 	onlyoffice-desktopeditors
 	xournalpp
+	losslesscut
 	# Comunicação
 	telegram-desktop
 )
