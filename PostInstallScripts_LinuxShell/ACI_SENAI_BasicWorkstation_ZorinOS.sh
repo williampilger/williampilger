@@ -115,6 +115,14 @@ apt_install firefox
 
 LOG "2026052604 - Instalando Google Chrome"
 deb_install 'https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb'
+LOG "2026052613 - Configurando Chrome para nao usar GNOME Keyring"
+sudo mkdir -p /etc/opt/chrome/policies/managed
+sudo tee /etc/opt/chrome/policies/managed/senai-aluno.json > /dev/null <<'CHROMEEOF'
+{
+  "PasswordManagerEnabled": false
+}
+CHROMEEOF
+
 
 # ─── OnlyOffice Desktop Editors ───────────────────────────────────────────────
 
