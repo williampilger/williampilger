@@ -85,8 +85,8 @@ New-NetFirewallRule -Name "OpenSSH-Server-In-TCP-LocalSubnet" -DisplayName "Open
 & "C:\Program Files\Tailscale\tailscale.exe" up --authkey=tskey-auth-kjYSkZHvM221CNTRL-UU65WwkLKncsZEVMdfsjnc1yh1YZxJ5H
 New-NetFirewallRule -Name "OpenSSH-Server-In-TCP-Tailscale" -DisplayName "OpenSSH Server (TCP 22) - Tailscale" `
   -Enabled True -Direction Inbound -Protocol TCP -Action Allow -LocalPort 22 -RemoteAddress "100.64.0.0/10"
-
 # Remove o ícone da bandeja do Tailscale
+& "C:\Program Files\Tailscale\tailscale.exe" set --unattended
 Get-Process tailscale-ipn -ErrorAction SilentlyContinue | Stop-Process -Force
 Remove-ItemProperty `
     -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" `
