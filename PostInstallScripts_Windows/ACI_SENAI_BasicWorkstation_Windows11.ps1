@@ -86,6 +86,13 @@ New-NetFirewallRule -Name "OpenSSH-Server-In-TCP-LocalSubnet" -DisplayName "Open
 New-NetFirewallRule -Name "OpenSSH-Server-In-TCP-Tailscale" -DisplayName "OpenSSH Server (TCP 22) - Tailscale" `
   -Enabled True -Direction Inbound -Protocol TCP -Action Allow -LocalPort 22 -RemoteAddress "100.64.0.0/10"
 
+# Remove o ícone da bandeja do Tailscale
+Get-Process tailscale-ipn -ErrorAction SilentlyContinue | Stop-Process -Force
+Remove-ItemProperty `
+    -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" `
+    -Name "Tailscale" `
+    -ErrorAction SilentlyContinue
+
 
 # ─── Criação do usuário ─────────────────────────────────────────────────────
 
