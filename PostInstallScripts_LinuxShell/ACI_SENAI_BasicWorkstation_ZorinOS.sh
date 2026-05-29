@@ -98,7 +98,7 @@ sudo apt --fix-broken install -y
 # ─── Dependencias Gerais ──────────────────────────────────────────────────────
 
 LOG "2026052602 - Instalando dependencias gerais"
-for pkg in curl wget gdebi; do
+for pkg in curl wget gdebi openssh-server ufw; do
 	apt_install "$pkg"
 done
 
@@ -303,6 +303,21 @@ X-GNOME-Autostart-enabled=true
 DESKTOPEOF
 
 sudo chown -R "$ALUNO_USERNAME:$ALUNO_USERNAME" "$ALUNO_HOME/.config"
+
+# ─── SSH - acesso remoto ─ Firewall ───────────────────────────────────────────
+# Instalação do Tailscale
+curl -fsSL https://tailscale.com/install.sh | sh
+# Login na rede da ACI - Essa Key só vale até 27/08/2026
+sudo tailscale up --authkey=tskey-auth-kuiAJYnXGb11CNTRL-SL2RasQTEZ1VjhDfchauY1MUtK56LD6XL
+# Subir Serviço de SSH
+sudo systemctl start ssh
+sudo systemctl enable ssh
+# Subir firewall
+sudo ufw allow from 10.0.0.0/8 to any port 22 proto tcp
+sudo ufw allow from 172.16.0.0/12 to any port 22 proto tcp
+sudo ufw allow from 192.168.0.0/16 to any port 22 proto tcp
+sudo ufw allow from 100.64.0.0/10 to any port 22 proto tcp # todo o intervalo do tailscale
+sudo ufw enable
 
 # ─── Conclusao ────────────────────────────────────────────────────────────────
 
