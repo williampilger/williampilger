@@ -82,7 +82,7 @@ New-NetFirewallRule -Name "OpenSSH-Server-In-TCP-LocalSubnet" -DisplayName "Open
   -Enabled True -Direction Inbound -Protocol TCP -Action Allow -LocalPort 22 -RemoteAddress LocalSubnet
 
 # Tailscale - Login na rede da ACI (Key válida até 27/08/2026)
-& "C:\Program Files\Tailscale\tailscale.exe" up --authkey=tskey-auth-kjYSkZHvM221CNTRL-UU65WwkLKncsZEVMdfsjnc1yh1YZxJ5H --ssh
+& "C:\Program Files\Tailscale\tailscale.exe" up --authkey=tskey-auth-kjYSkZHvM221CNTRL-UU65WwkLKncsZEVMdfsjnc1yh1YZxJ5H
 New-NetFirewallRule -Name "OpenSSH-Server-In-TCP-Tailscale" -DisplayName "OpenSSH Server (TCP 22) - Tailscale" `
   -Enabled True -Direction Inbound -Protocol TCP -Action Allow -LocalPort 22 -RemoteAddress "100.64.0.0/10"
 
