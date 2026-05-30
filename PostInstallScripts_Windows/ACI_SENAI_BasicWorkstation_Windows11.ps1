@@ -88,10 +88,8 @@ Remove-ItemProperty `
 
 # Usuário Aluno
 if (-not (Get-LocalUser -Name "Aluno" -ErrorAction SilentlyContinue)) {
-  New-LocalUser -Name "Aluno" -NoPassword -FullName "Aluno" `
-    -PasswordNeverExpires -UserMayNotChangePassword
-  # Adiciona ao grupo Usuários padrão (SID fixo, independe do idioma do Windows)
-  Add-LocalGroupMember -SID "S-1-5-32-545" -Member "Aluno"
+    New-LocalUser -Name "Aluno" -NoPassword -FullName "Aluno" -UserMayNotChangePassword
+    Add-LocalGroupMember -SID "S-1-5-32-545" -Member "Aluno"
 }
 # Bloqueia login e adição de contas Microsoft para todos os usuários
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" `
