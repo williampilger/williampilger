@@ -5,19 +5,6 @@
 ## irm https://raw.githubusercontent.com/williampilger/williampilger/main/PostInstallScripts_Windows/ACI_SENAI_BasicWorkstation_Windows11.ps1 | iex
 
 
-# ─── Configurações do Script ─────────────────────────────────────────────────────
-
-
-$packages = @(
-  # Essenciais
-  @{ Id = '7zip.7zip' }
-  @{ Id = 'Google.Chrome' }
-  @{ Id = 'Mozilla.Firefox' }
-  @{ Id = 'ONLYOFFICE.DesktopEditors' }
-  @{ Id = 'Tailscale.Tailscale' }
-)
-
-
 # ─── Pré-requisitos ─────────────────────────────────────────────────────────
 
 
@@ -64,36 +51,12 @@ if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
 # atualizar fontes do winget
 winget source update --accept-source-agreements | Out-Null
 
-# Wrapper para instalar com padrão de máquina
-function Install-Winget {
-  param(
-    [Parameter(Mandatory=$true)][string]$Id,
-    [string]$Source = "winget",
-    [string]$Override = $null
-  )
-  $base = @(
-    'install',
-    '--id', $Id,
-    '--source', $Source,
-    '--scope', 'machine',
-    '--accept-package-agreements',
-    '--accept-source-agreements',
-    '--disable-interactivity',
-    '--silent',
-    '--force' # força upgrade se já existir
-  )
-  if ($Override) { $base += @('--override', $Override) }
-  winget @base
-}
-
-# Instalar toda a lista de softwares
-foreach ($p in $packages) {
-  try {
-    Install-Winget -Id $p.Id -Source ($p.Source) -Override ($p.Override)
-  } catch {
-    Write-Warning "Falhou: $($p.Id) Detalhe: $($_.Exception.Message)"
-  }
-}
+# Instalar pacotes
+winget install --id Google.Chrome --source winget --scope machine --accept-package-agreements --accept-source-agreements --silent
+winget install --id 7zip.7zip --source winget --scope machine --accept-package-agreements --accept-source-agreements --silent
+winget install --id Mozilla.Firefox --source winget --scope machine --accept-package-agreements --accept-source-agreements --silent
+winget install --id ONLYOFFICE.DesktopEditors --source winget --scope machine --accept-package-agreements --accept-source-agreements --silent
+winget install --id Tailscale.Tailscale --source winget --scope machine --accept-package-agreements --accept-source-agreements --silent
 
 
 # ─── Acesso ACI Externo ─────────────────────────────────────────────────────
