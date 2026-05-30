@@ -173,3 +173,9 @@ reg unload "HKU\DefaultUser"
 winget upgrade --all --include-unknown --scope machine --accept-package-agreements --accept-source-agreements --silent --disable-interactivity
 
 Write-Host "`nConcluído."
+$resposta = Read-Host "Deseja reiniciar agora? (S/N)"
+if ($resposta -match "^[Ss]$") {
+    Restart-Computer -Force
+} else {
+    Write-Host "Reinicie manualmente para aplicar todas as configurações."
+}
