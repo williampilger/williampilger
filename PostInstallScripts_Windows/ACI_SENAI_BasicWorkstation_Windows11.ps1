@@ -10,13 +10,43 @@
 
 $packages = @(
   # Essenciais
-  @{ Id = 'Microsoft.PowerShell' }
   @{ Id = '7zip.7zip' }
   @{ Id = 'Google.Chrome' }
   @{ Id = 'Mozilla.Firefox' }
   @{ Id = 'ONLYOFFICE.DesktopEditors' }
   @{ Id = 'Tailscale.Tailscale' }
 )
+
+
+# ─── Pré-requisitos ─────────────────────────────────────────────────────────
+
+
+# Garante winget atualizado
+Write-Host "Atualizando winget..."
+$url = "https://aka.ms/getwinget"
+$out = "$env:TEMP\AppInstaller.msixbundle"
+Invoke-WebRequest -Uri $url -OutFile $out -UseBasicParsing
+Add-AppxPackage -Path $out -ErrorAction SilentlyContinue
+
+# Aguarda winget ficar disponível
+$tries = 0
+while (-not (Get-Command winget -ErrorAction SilentlyContinue) -and $tries -lt 10) {
+    Start-Sleep -Seconds 3
+    $tries++
+}
+
+if (-not (Get-Command winget -ErrorAction SilentlyContinue)) {
+    Write-Error "winget não encontrado mesmo após instalação. Abra a Microsoft Store e instale o 'App Installer'."
+    exit 1
+}
+
+# Aceita os termos do winget (necessário em instalações limpas)
+winget list --accept-source-agreements | Out-Null
+
+# Atualiza as fontes
+winget source update --accept-source-agreements | Out-Null
+
+Write-Host "winget pronto: $(winget --version)"
 
 
 # ─── Instalação dos pacotes ─────────────────────────────────────────────────────
@@ -30,12 +60,8 @@ if (-not ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdent
   Start-Process -FilePath "powershell.exe" -Verb RunAs -ArgumentList $args
   exit
 }
-# Conferir winget
-if (-not (Get-Command winget -ErrorAction SilentlyContinue)) {
-  Write-Error "winget não encontrado. Abra a Microsoft Store e instale o 'App Installer' da Microsoft."
-  exit 1
-}
-# Atualizar fontes do winget
+
+# atualizar fontes do winget
 winget source update --accept-source-agreements | Out-Null
 
 # Wrapper para instalar com padrão de máquina
