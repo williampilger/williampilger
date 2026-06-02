@@ -83,14 +83,10 @@ Remove-ItemProperty `
     -ErrorAction SilentlyContinue
 
 
-# ─── Criação do usuário ─────────────────────────────────────────────────────
+
+# ─── Ajustes das políticas de segurança do windows ─────────────────────────────────────────────────────
 
 
-# Usuário Aluno
-if (-not (Get-LocalUser -Name "Aluno" -ErrorAction SilentlyContinue)) {
-    New-LocalUser -Name "Aluno" -NoPassword -FullName "Aluno" -UserMayNotChangePassword
-    Add-LocalGroupMember -SID "S-1-5-32-545" -Member "Aluno"
-}
 
 # Permite login sem senha (senha em branco)
 Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa" `
@@ -99,6 +95,23 @@ Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa" `
 # Bloqueia login e adição de contas Microsoft para todos os usuários
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" `
   -Name "NoConnectedUser" -Value 3 -Type DWord -Force
+
+# Política de máquina — desabilita Windows Hello
+New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\PassportForWork" -Force | Out-Null
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\PassportForWork" `
+  -Name "Enabled" -Value 0 -Type DWord -Force
+
+
+
+# ─── Criação do usuário ─────────────────────────────────────────────────────
+
+
+# Usuário Aluno
+if (-not (Get-LocalUser -Name "Aluno" -ErrorAction SilentlyContinue)) {
+    New-LocalUser -Name "Aluno" -NoPassword -FullName "Aluno" -UserMayNotChangePassword
+    Add-LocalGroupMember -SID "S-1-5-32-545" -Member "Aluno"
+}
+Set-LocalUser -Name "Aluno" -PasswordNeverExpires $true
 
 
 
