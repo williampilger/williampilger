@@ -117,6 +117,8 @@ Set-LocalUser -Name "Aluno" -PasswordNeverExpires $true
 
 # ─── Interface do usuário ─────────────────────────────────────────────────────
 
+
+
 # Políticas de máquina (todos os usuários, aplicadas sem login)
 New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Dsh" -Force | Out-Null
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Dsh" `
@@ -133,9 +135,8 @@ reg add $advKey /v "TaskbarAl"         /t REG_DWORD /d 0 /f | Out-Null  # ícone
 reg add $advKey /v "TaskbarDa"         /t REG_DWORD /d 0 /f | Out-Null  # ocultar Widgets
 reg add $advKey /v "ShowCopilotButton" /t REG_DWORD /d 0 /f | Out-Null  # ocultar Copilot
 reg add $advKey /v "LaunchTo"          /t REG_DWORD /d 1 /f | Out-Null  # Explorer → Este Computador
-
-reg add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\Search" `
-  /v "SearchboxTaskbarMode" /t REG_DWORD /d 0 /f | Out-Null             # ocultar Pesquisa
+reg add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v TaskbarMn /t REG_DWORD /d 0 /f       # Ocultar Chat
+reg add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\Search" /v "SearchboxTaskbarMode" /t REG_DWORD /d 0 /f | Out-Null             # ocultar Pesquisa
 
 $deskKey = "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel"
 reg add $deskKey /v "{20D04FE0-3AEA-1069-A2D8-08002B30309D}" /t REG_DWORD /d 0 /f | Out-Null  # Este Computador
@@ -152,8 +153,33 @@ $startMenu  = "$env:ProgramData\Microsoft\Windows\Start Menu\Programs"
     if (Test-Path $src) { Copy-Item $src $pubDesktop -Force }
 }
 
+# Definindo Taskbar padrão (Explorer e Google Chrome)
+$xmlPath = "C:\Windows\TaskbarLayout.xml"
+@'
+<?xml version="1.0" encoding="utf-8"?>
+<LayoutModificationTemplate
+  xmlns="http://schemas.microsoft.com/Start/2014/LayoutModification"
+  xmlns:defaultlayout="http://schemas.microsoft.com/Start/2014/FullDefaultLayout"
+  xmlns:taskbar="http://schemas.microsoft.com/Start/2014/TaskbarLayout"
+  Version="1">
+
+  <CustomTaskbarLayoutCollection PinListPlacement="Replace">
+    <defaultlayout:TaskbarLayout>
+      <taskbar:TaskbarPinList>
+        <taskbar:DesktopApp DesktopApplicationID="Microsoft.Windows.Explorer" />
+        <taskbar:DesktopApp DesktopApplicationLinkPath="%ProgramData%\Microsoft\Windows\Start Menu\Programs\Google Chrome.lnk" />
+      </taskbar:TaskbarPinList>
+    </defaultlayout:TaskbarLayout>
+  </CustomTaskbarLayoutCollection>
+</LayoutModificationTemplate>
+'@ | Set-Content -Path $xmlPath -Encoding UTF8
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Explorer" /v StartLayoutFile /t REG_SZ /d $xmlPath /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Explorer" /v LockedStartLayout /t REG_DWORD /d 1 /f
+
+
 
 # ─── Remover OneDrive definitivamente ─────────────────────────────────────────
+
 
 
 Stop-Process -Name "OneDrive" -Force -ErrorAction SilentlyContinue
