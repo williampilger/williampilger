@@ -71,17 +71,33 @@ New-NetFirewallRule -Name "OpenSSH-Server-In-TCP-LocalSubnet" -DisplayName "Open
   -Enabled True -Direction Inbound -Protocol TCP -Action Allow -LocalPort 22 -RemoteAddress LocalSubnet
 
 # Tailscale - Login na rede da ACI (Key válida até 27/08/2026)
-& "C:\Program Files\Tailscale\tailscale.exe" up --authkey=tskey-auth-kjYSkZHvM221CNTRL-UU65WwkLKncsZEVMdfsjnc1yh1YZxJ5H
+& "C:\Program Files\Tailscale\tailscale.exe" up `
+  --authkey=tskey-auth-kjYSkZHvM221CNTRL-UU65WwkLKncsZEVMdfsjnc1yh1YZxJ5H `
+  --unattended=true
+# Firewall pro Tailscale
 New-NetFirewallRule -Name "OpenSSH-Server-In-TCP-Tailscale" -DisplayName "OpenSSH Server (TCP 22) - Tailscale" `
   -Enabled True -Direction Inbound -Protocol TCP -Action Allow -LocalPort 22 -RemoteAddress "100.64.0.0/10"
-# Remove o ícone da bandeja do Tailscale
-& "C:\Program Files\Tailscale\tailscale.exe" set --unattended
+# Garante que o serviço continue automático
+Set-Service Tailscale -StartupType Automatic
+Start-Service Tailscale
+# Remove/fecha apenas a interface gráfica da bandeja
 Get-Process tailscale-ipn -ErrorAction SilentlyContinue | Stop-Process -Force
+# Remove inicialização automática da interface gráfica
 Remove-ItemProperty `
-    -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" `
-    -Name "Tailscale" `
-    -ErrorAction SilentlyContinue
-
+  -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" `
+  -Name "Tailscale" `
+  -ErrorAction SilentlyContinue
+Remove-ItemProperty `
+  -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" `
+  -Name "Tailscale" `
+  -ErrorAction SilentlyContinue
+Remove-Item "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup\Tailscale.lnk" `
+  -Force `
+  -ErrorAction SilentlyContinue
+Remove-Item "$env:ProgramData\Microsoft\Windows\Start Menu\Programs\Startup\Tailscale.lnk" `
+  -Force `
+  -ErrorAction SilentlyContinue
+  
 
 
 # ─── Ajustes das políticas de segurança do windows ─────────────────────────────────────────────────────
