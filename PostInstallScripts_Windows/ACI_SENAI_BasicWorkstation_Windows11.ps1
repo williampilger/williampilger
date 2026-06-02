@@ -178,36 +178,128 @@ reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\Explorer" /v LockedStartLayout
 
 
 
+# ─── Remover apps da Microsoft ─────────────────────────────────────────
+
+
+$apps = @(
+    "Microsoft.XboxApp",
+    "Microsoft.XboxGamingOverlay",
+    "Microsoft.XboxGameOverlay",
+    "Microsoft.XboxIdentityProvider",
+    "Microsoft.XboxSpeechToTextOverlay",
+    "Microsoft.Xbox.TCUI",
+    "Microsoft.GamingApp",
+    "Microsoft.MicrosoftSolitaireCollection",
+    "Microsoft.BingNews",
+    "Microsoft.People",
+    "Microsoft.Todos",
+    "Microsoft.WindowsFeedbackHub",
+    "Microsoft.SkypeApp",
+    "Microsoft.549981C3F5F10",
+    "Clipchamp.Clipchamp",
+    "Microsoft.OutlookForWindows",
+    "MSTeams"
+)
+foreach ($app in $apps) {
+
+    Get-AppxPackage -AllUsers -Name $app |
+        Remove-AppxPackage -AllUsers -ErrorAction SilentlyContinue
+
+    Get-AppxProvisionedPackage -Online |
+        Where-Object DisplayName -eq $app |
+        Remove-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue
+}
+
+
 # ─── Remover OneDrive definitivamente ─────────────────────────────────────────
 
 
 
+# Bloquear OneDrive por política para todos os usuários
+New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive" -Force | Out-Null
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive" `
+  -Name "DisableFileSyncNGSC" -Value 1 -Type DWord -Force
+
+# Desativar sugestões de backup/sync no Explorer para todos os usuários novos
+reg load "HKU\DefaultUser" "C:\Users\Default\NTUSER.DAT"
+
+reg add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" `
+  /v "ShowSyncProviderNotifications" /t REG_DWORD /d 0 /f | Out-Null
+
+reg add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" `
+  /v "SoftLandingEnabled" /t REG_DWORD /d 0 /f | Out-Null
+
+reg add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" `
+  /v "SubscribedContent-338389Enabled" /t REG_DWORD /d 0 /f | Out-Null
+
+reg add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" `
+  /v "SubscribedContent-338388Enabled" /t REG_DWORD /d 0 /f | Out-Null
+
+reg add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" `
+  /v "SubscribedContent-310093Enabled" /t REG_DWORD /d 0 /f | Out-Null
+
+reg delete "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\Run" `
+  /v "OneDrive" /f 2>$null
+
+[GC]::Collect()
+reg unload "HKU\DefaultUser"
+
+# Aplicar também ao usuário atual/Admin
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" `
+  /v "ShowSyncProviderNotifications" /t REG_DWORD /d 0 /f | Out-Null
+
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" `
+  /v "SoftLandingEnabled" /t REG_DWORD /d 0 /f | Out-Null
+
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" `
+  /v "SubscribedContent-338389Enabled" /t REG_DWORD /d 0 /f | Out-Null
+
+# Parar OneDrive
 Stop-Process -Name "OneDrive" -Force -ErrorAction SilentlyContinue
 
-winget uninstall --id Microsoft.OneDrive --silent --accept-source-agreements
+# Desinstalar pelo instalador nativo do Windows
+$oneDriveSetups = @(
+  "$env:SystemRoot\System32\OneDriveSetup.exe",
+  "$env:SystemRoot\SysWOW64\OneDriveSetup.exe"
+)
 
-# Limpar pastas residuais
+foreach ($setup in $oneDriveSetups) {
+  if (Test-Path $setup) {
+    Start-Process -FilePath $setup -ArgumentList "/uninstall" -Wait -WindowStyle Hidden
+  }
+}
+
+# Desinstalar via winget, se existir
+winget uninstall --id Microsoft.OneDrive --silent --accept-source-agreements --disable-interactivity `
+  2>$null
+
+# Remover provisionamento, se existir como Appx
+Get-AppxProvisionedPackage -Online |
+  Where-Object { $_.DisplayName -like "*OneDrive*" } |
+  Remove-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue
+
+Get-AppxPackage -AllUsers |
+  Where-Object { $_.Name -like "*OneDrive*" } |
+  Remove-AppxPackage -AllUsers -ErrorAction SilentlyContinue
+
+# Remover inicialização para todos os usuários carregados
+reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /f 2>$null
+reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /f 2>$null
+reg delete "HKLM\Software\WOW6432Node\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /f 2>$null
+
+# Remover do painel lateral do Explorer
+reg delete "HKCR\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /f 2>$null
+reg delete "HKCR\Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /f 2>$null
+
+# Limpar pastas residuais principais
 @(
   "$env:USERPROFILE\OneDrive",
   "$env:LOCALAPPDATA\Microsoft\OneDrive",
   "$env:PROGRAMDATA\Microsoft OneDrive",
   "$env:SYSTEMDRIVE\OneDriveTemp"
-) | ForEach-Object { Remove-Item $_ -Force -Recurse -ErrorAction SilentlyContinue }
-
-# Remover do painel lateral do Explorer
-reg delete "HKCR\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /f | Out-Null
-reg delete "HKCR\Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /f | Out-Null
-
-# Bloquear reinstalação automática via política
-New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive" -Force | Out-Null
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\OneDrive" `
-  -Name "DisableFileSyncNGSC" -Value 1 -Type DWord -Force
-
-# Impedir que novos usuários recebam OneDrive no startup
-reg load "HKU\DefaultUser" "C:\Users\Default\NTUSER.DAT"
-reg delete "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /f | Out-Null
-[GC]::Collect()
-reg unload "HKU\DefaultUser"
+) | ForEach-Object {
+  Remove-Item $_ -Force -Recurse -ErrorAction SilentlyContinue
+}
 
 
 # ─── Finalização ─────────────────────────────────────────────────────
