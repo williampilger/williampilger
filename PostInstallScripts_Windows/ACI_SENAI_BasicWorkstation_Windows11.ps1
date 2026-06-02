@@ -318,6 +318,27 @@ reg delete "HKCR\Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /f 2>
 }
 
 
+
+# ─── Energia ─────────────────────────────────────────────────────
+
+
+
+# Nunca desligar o monitor — política de máquina (todos os usuários)
+New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Power\PowerSettings\3C0BC021-C8A8-4E07-A973-6B14CBCB2B7E" -Force | Out-Null
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Power\PowerSettings\3C0BC021-C8A8-4E07-A973-6B14CBCB2B7E" `
+  -Name "ACSettingIndex" -Value 0 -Type DWord -Force
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Power\PowerSettings\3C0BC021-C8A8-4E07-A973-6B14CBCB2B7E" `
+  -Name "DCSettingIndex" -Value 0 -Type DWord -Force
+
+# Nunca suspender — política de máquina (todos os usuários)
+New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Power\PowerSettings\238C9FA8-0AAD-41ED-83F4-97BE242C8F20" -Force | Out-Null
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Power\PowerSettings\238C9FA8-0AAD-41ED-83F4-97BE242C8F20" `
+  -Name "ACSettingIndex" -Value 0 -Type DWord -Force
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Power\PowerSettings\238C9FA8-0AAD-41ED-83F4-97BE242C8F20" `
+  -Name "DCSettingIndex" -Value 0 -Type DWord -Force
+
+
+
 # ─── Finalização ─────────────────────────────────────────────────────
 
 
