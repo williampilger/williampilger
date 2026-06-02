@@ -117,6 +117,12 @@ New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\PassportForWork" -Force | Out-
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\PassportForWork" `
   -Name "Enabled" -Value 0 -Type DWord -Force
 
+# Bloquear acesso ao painel de controle (herdado pelo Aluno)
+reg load "HKU\DefaultUser" "C:\Users\Default\NTUSER.DAT"
+reg add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" `
+  /v "NoControlPanel" /t REG_DWORD /d 1 /f | Out-Null
+[GC]::Collect()
+reg unload "HKU\DefaultUser"
 
 
 # ─── Criação do usuário ─────────────────────────────────────────────────────
