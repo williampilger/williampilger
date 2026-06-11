@@ -345,11 +345,28 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Power\PowerSettings\23
 
 
 
-# ─── Finalização ─────────────────────────────────────────────────────
+# ─── Atualização e Ponto de Restauração ─────────────────────────────────────────────
 
 
 # Upgrade final de tudo no escopo de máquina
 winget upgrade --all --include-unknown --scope machine --accept-package-agreements --accept-source-agreements --silent --disable-interactivity
+
+# A Proteção do Sistema vem DESABILITADA por padrão no Win11 — precisa ligar antes
+Enable-ComputerRestore -Drive "C:\"
+
+# Remove o limite de 1 ponto a cada 24h (senão chamadas repetidas são ignoradas sem erro)
+New-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" -Force | Out-Null
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" `
+  -Name "SystemRestorePointCreationFrequency" -Value 0 -Type DWord -Force
+
+# Cria o ponto
+Checkpoint-Computer -Description "SENAI - Pos-instalacao concluida" -RestorePointType "MODIFY_SETTINGS"
+
+
+
+# ─── Finalização ─────────────────────────────────────────────────────
+
+
 
 Write-Host "`nConcluído."
 $resposta = Read-Host "Deseja reiniciar agora? (S/N)"
