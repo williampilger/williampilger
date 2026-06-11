@@ -362,6 +362,8 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Syste
 # Cria o ponto
 Checkpoint-Computer -Description "SENAI - Pos-instalacao concluida" -RestorePointType "MODIFY_SETTINGS"
 
+# Para criar um pós finalizar a configuração, ou no momento da instalação
+#Checkpoint-Computer -Description "SENAI - Finalizado para Utilização" -RestorePointType "MODIFY_SETTINGS"
 
 
 # ─── Finalização ─────────────────────────────────────────────────────
