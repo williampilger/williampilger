@@ -319,7 +319,26 @@ sudo ufw allow from 192.168.0.0/16 to any port 22 proto tcp
 sudo ufw allow from 100.64.0.0/10 to any port 22 proto tcp # todo o intervalo do tailscale
 sudo ufw enable
 
+
+# ─── Snapshot de pos-instalacao (Timeshift) ───────────────────────────────────
+LOG "2026052614 - Criando snapshot pos-instalacao com Timeshift"
+
+apt_install timeshift
+
+# Configura Timeshift via CLI (rsync, apenas no disco raiz, sem snapshots automaticos)
+sudo timeshift --setup \
+  --snapshot-type rsync \
+  --backup-disk / \
+  --schedule-type none 2>/dev/null || true
+
+# Cria o snapshot rotulado
+sudo timeshift --create --comments "SENAI - Pos-instalacao concluida" --yes
+
+LOG "Snapshot criado com sucesso."
+
+
 # ─── Conclusao ────────────────────────────────────────────────────────────────
+
 
 LOG "2026052612 - Script concluido."
 
