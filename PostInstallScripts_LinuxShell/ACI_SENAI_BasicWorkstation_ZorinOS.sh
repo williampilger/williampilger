@@ -337,6 +337,9 @@ sudo timeshift --setup \
 # Cria o snapshot rotulado
 sudo timeshift --create --comments "SENAI - Pos-instalacao concluida" --yes
 
+# Criar outro snapshot quando tiver com tudo pronto
+#sudo timeshift --create --comments "SENAI - Finalizado para Utilização" --yes
+
 LOG "Snapshot criado com sucesso."
 
 
