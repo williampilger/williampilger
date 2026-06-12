@@ -325,10 +325,13 @@ LOG "2026052614 - Criando snapshot pos-instalacao com Timeshift"
 
 apt_install timeshift
 
+# Detectar o disco raiz
+ROOT_DEVICE=$(findmnt -n -o SOURCE /)
+
 # Configura Timeshift via CLI (rsync, apenas no disco raiz, sem snapshots automaticos)
 sudo timeshift --setup \
   --snapshot-type rsync \
-  --backup-disk / \
+  --backup-disk "$ROOT_DEVICE" \
   --schedule-type none 2>/dev/null || true
 
 # Cria o snapshot rotulado
