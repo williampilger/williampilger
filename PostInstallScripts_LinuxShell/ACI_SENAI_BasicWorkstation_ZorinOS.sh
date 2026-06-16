@@ -308,7 +308,7 @@ sudo chown -R "$ALUNO_USERNAME:$ALUNO_USERNAME" "$ALUNO_HOME/.config"
 # Instalação do Tailscale
 curl -fsSL https://tailscale.com/install.sh | sh
 # Login na rede da ACI - Essa Key só vale até 27/08/2026
-sudo tailscale up --authkey=tskey-auth-kjYSkZHvM221CNTRL-UU65WwkLKncsZEVMdfsjnc1yh1YZxJ5H --ssh
+sudo tailscale up --authkey=tskey-auth-kjYSkZHvM221CNTRL-UU65WwkLKncsZEVMdfsjnc1yh1YZxJ5H
 # Subir Serviço de SSH
 sudo systemctl start ssh
 sudo systemctl enable ssh
