@@ -238,18 +238,17 @@ gnome-extensions enable emoji-copy@felipeftn
 LOG '202407221023 - Start SSH Access configuration'
 sudo systemctl start ssh
 sudo systemctl enable ssh
+# Instalando o Tailscale
+curl -fsSL https://tailscale.com/install.sh | sh
+# Depois, é necessário dar um `tailscale up` e fazer login. Ou, usar a chave da Authenty, assim:
+#sudo tailscale up --authkey=tskey-auth-SAMPLESAMPLESAMPLE-SAMPLESAMPLESAMPLESAMPLESAMPLESAMPLE
 
 # Firewall
 LOG '202407221022 - Start Firewall configuration'
 # Usando /16 pra permitir todos 192.168.X.X
-sudo ufw allow from 192.168.0.0/16 to any port 22 proto tcp
-sudo ufw allow from 192.168.0.0/16 to any port 80 proto tcp # HTTP
-sudo ufw allow from 192.168.0.0/16 to any port 443 proto tcp # HTTPS
-sudo ufw allow from 192.168.0.0/16 to any port 3389 proto tcp # RDP
-sudo ufw allow from 192.168.0.0/16 to any port 3390 proto tcp # VNC Viewonly
-sudo ufw allow from 192.168.0.0/16 to any port 5900 proto tcp # VNC
-sudo ufw allow from 192.168.0.0/16 to any port 3000:3010 proto tcp # APPS tests
-sudo ufw allow from 192.168.0.0/16 to any port 8080 proto tcp # APPS tests
+sudo ufw allow from 192.168.0.0/16 to any port
+sudo ufw allow from 172.17.0.0/16 to any port
+sudo ufw allow from 172.17.0.0/16 to any port
 sudo ufw enable
 
 # Docker Configuration
