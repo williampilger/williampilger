@@ -10,7 +10,7 @@ echo "
   Script: Codding Workstation Setup for Ubuntu
   VERSÃO DO SISTEMA: Ubuntu - 25.04 LTS
   Hardware: DELL Inc. Vostro 3710 - 12th Gen Intel Core i7-12700 x 20
-  Latest Version: 2025-09-26 15:28
+  Latest Version: 2026-07-13 13:58
   Statistics: Tris script takes less than 1 hour (depends on your internet connection, obviously)
               Author: Williampilger                         
 ============================================================
@@ -98,6 +98,7 @@ APT_PROGRAMS=(
 	samba
 	xclip
 	gdebi
+	xrdp
 	p7zip
 	p7zip-full
 	p7zip-rar
@@ -224,7 +225,7 @@ wget -qO- https://raw.githubusercontent.com/williampilger/code-nautilus/master/i
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/williampilger/PomodoroTimer-Python/main/install.sh)"
 
 # Instalando o LazyVim
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/williampilger/nvim/refs/heads/main/install.sh)"
+#bash -c "$(curl -fsSL https://raw.githubusercontent.com/williampilger/nvim/refs/heads/main/install.sh)"
 
 
 LOG '2407111129 - Start Gnome Extensions Instalation:'
@@ -248,7 +249,7 @@ LOG '202407221022 - Start Firewall configuration'
 # Usando /16 pra permitir todos 192.168.X.X
 sudo ufw allow from 192.168.0.0/16 to any port
 sudo ufw allow from 172.17.0.0/16 to any port
-sudo ufw allow from 172.17.0.0/16 to any port
+sudo ufw allow from 100.64.0.0/10 to any port
 sudo ufw enable
 
 # Docker Configuration
@@ -274,11 +275,6 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys terminal "['<Super>t'
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-left "['<Control><Super>Left']"
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-right "['<Control><Super>Right']"
 gsettings set org.gnome.shell favorite-apps "['org.gnome.Nautilus.desktop', 'google-chrome.desktop']"
-# Acesso Remoto
-gsettings set org.gnome.desktop.remote-desktop.rdp enable true
-gsettings set org.gnome.desktop.remote-desktop.rdp view-only false
-gsettings set org.gnome.desktop.remote-desktop.rdp negotiate-port true
-gsettings set org.gnome.desktop.remote-desktop.rdp screen-share-mode 'mirror-primary'
 # Outros Diversos
 gsettings set org.gnome.gedit.preferences.editor restore-session false
 gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'suspend'
@@ -294,6 +290,10 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/or
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ name "Open System Monitor"
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ command "gnome-system-monitor"
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ binding "<Primary><Shift>Escape"
+
+# Acesso remoto por RDP
+sudo adduser xrdp ssl-cert# Adicionar xrdp ao grupo ssl-cert (obrigatório no Ubuntu moderno)
+sudo systemctl enable --now xrdp
 
 # Wake-up-on-LAN
 LOG '202407221026 - Configuring Wake-Up-On-LAN'
