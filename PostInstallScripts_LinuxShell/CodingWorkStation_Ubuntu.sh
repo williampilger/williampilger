@@ -145,6 +145,7 @@ APT_PROGRAMS=(
 	gnupg2
  	terraform
 	google-cloud-cli
+	nginx
 	# Docker
 	docker-ce
 	docker-ce-cli
