@@ -8,9 +8,9 @@ echo "
             Welcome to the Ubuntu Post-Install Script       
 ============================================================
   Script: Codding Workstation Setup for Ubuntu
-  VERSÃO DO SISTEMA: Ubuntu - 25.04 LTS
+  VERSÃO DO SISTEMA: Ubuntu - 26.04 LTS
   Hardware: DELL Inc. Vostro 3710 - 12th Gen Intel Core i7-12700 x 20
-  Latest Version: 2026-07-13 13:58
+  Latest Version: 2026-07-16
   Statistics: Tris script takes less than 1 hour (depends on your internet connection, obviously)
               Author: Williampilger                         
 ============================================================
