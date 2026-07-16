@@ -269,9 +269,9 @@ curl -fsSL https://tailscale.com/install.sh | sh
 # Firewall
 LOG '202407221022 - Start Firewall configuration'
 # Usando /16 pra permitir todos 192.168.X.X
-sudo ufw allow from 192.168.0.0/16 to any port
-sudo ufw allow from 172.17.0.0/16 to any port
-sudo ufw allow from 100.64.0.0/10 to any port
+sudo ufw allow from 192.168.0.0/16 to any
+sudo ufw allow from 172.17.0.0/16 to any
+sudo ufw allow from 100.64.0.0/10 to any
 sudo ufw enable
 
 # Docker user Configuration
