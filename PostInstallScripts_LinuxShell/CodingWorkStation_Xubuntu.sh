@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ## Execute diretamente usando:
-## bash -c "$(curl -fsSL https://raw.githubusercontent.com/williampilger/williampilger/main/PostInstallScripts_LinuxShell/CoddingWorkStation_Ubuntu.sh)"
+## bash -c "$(curl -fsSL https://raw.githubusercontent.com/williampilger/williampilger/main/PostInstallScripts_LinuxShell/CodingWorkStation_Ubuntu.sh)"
 
 echo "
 ============================================================
