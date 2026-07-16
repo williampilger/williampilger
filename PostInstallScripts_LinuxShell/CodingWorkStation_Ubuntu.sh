@@ -32,6 +32,7 @@ deb_install(){
 	else
 		LOG "	2212201206 - Impossible install .DEB '$URL'."
 	fi
+	apt --fix-broken install -y
 	rm setup.deb
 }
 
@@ -72,7 +73,7 @@ snap_install(){
 LOG '2607161031 - Add Primeiras Dependências'
 
 sudo apt update
-sudo apt install ca-certificates apt-transport-https curl
+sudo apt install -y ca-certificates apt-transport-https curl
 
 
 LOG '2507311331 - Add External Repositories'
@@ -82,7 +83,7 @@ wget -O - https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/sh
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(grep -oP '(?<=UBUNTU_CODENAME=).*' /etc/os-release || lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
 
 # Google CLI
-sudo curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg
+curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg
 echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
 
 # Docker (GPG Keys + Repo
@@ -119,14 +120,14 @@ APT_PROGRAMS=(
 	p7zip
 	p7zip-full
 	p7zip-rar
-	gnome-software-plugin-flatpakt
+	gnome-software-plugin-flatpak
  	gnome-shell-extensions
   	gnome-tweaks
 	gnome-network-displays
+	ubuntu-drivers-common
   	flatpak
 	transmission
 	kdeconnect
- 	guvcview
   	cheese
    	blueman
    	btrfs-progs # suporte ao sistema de arquivos BTRFS
@@ -213,7 +214,8 @@ for nome_do_programa in ${SNAP_PROGRAMS[@]}; do
 done
 
 LOG '2607161042 - NVM e Node Install:'
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash
+export NVM_DIR="$HOME/.nvm"; [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # ISSO SERVE PRA O NVM JÁ FUNCIONAR IMEDIATAMENTE
 nvm install 22
 nvm use 22
 nvm alias default 22
@@ -231,7 +233,6 @@ DEB_PROGRAMS=(
 for nome_do_programa in ${DEB_PROGRAMS[@]}; do
 	deb_install $nome_do_programa
 done
-apt --fix-broken install -y # necessário pro discord, por algum motivo desconhecido
 
 LOG '250926144301 - Start Drivers auto-install:'
 
@@ -273,9 +274,8 @@ sudo ufw allow from 172.17.0.0/16 to any port
 sudo ufw allow from 100.64.0.0/10 to any port
 sudo ufw enable
 
-# Docker Configuration
+# Docker user Configuration
 sudo usermod -aG docker $USER
-newgrp docker #aplica logo as alterações
 
 # Gnome COnfig (Para conferir, pode-se usar `dconf dump /` no terminal )
 LOG '202407221024 - Start Gnome configuration'
