@@ -69,6 +69,12 @@ snap_install(){
 	fi
 }
 
+LOG '2607161031 - Add Primeiras Dependências'
+
+sudo apt update
+sudo apt install ca-certificates apt-transport-https curl
+
+
 LOG '2507311331 - Add External Repositories'
 
 # Terraform
@@ -79,11 +85,23 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashi
 sudo curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg
 echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
 
+# Docker (GPG Keys + Repo
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+sudo tee /etc/apt/sources.list.d/docker.sources <<EOF
+Types: deb
+URIs: https://download.docker.com/linux/ubuntu
+Suites: $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}")
+Components: stable
+Architectures: $(dpkg --print-architecture)
+Signed-By: /etc/apt/keyrings/docker.asc
+EOF
 
 LOG '2212200909 - Start Script. Updating...'
 
-sudo apt-get update
-sudo apt-get -y upgrade
+sudo apt update
+sudo apt -y upgrade
 sudo apt --fix-broken install
 
 LOG '2212200910 - Start System APPs instalation:'
@@ -98,7 +116,6 @@ APT_PROGRAMS=(
 	samba
 	xclip
 	gdebi
-	xrdp
 	p7zip
 	p7zip-full
 	p7zip-rar
@@ -115,27 +132,24 @@ APT_PROGRAMS=(
    	btrfs-progs # suporte ao sistema de arquivos BTRFS
 	cryptsetup # suporte à criptografia de unidades
 	bpytop # ferramenta quase gráfica de terminal para monitorar o sistema
-	openssh-server
 	rclone
 	# Codding
 	python3
 	python3-pip
 	git
 	git-lfs
-	curl
 	filezilla
- 	docker.io
-  	docker-compose
-   	nodejs
-	npm
-	tilix
-	httpie
-	apt-transport-https
- 	ca-certificates
-  	gnupg
+   	tilix
+	gnupg
 	gnupg2
  	terraform
 	google-cloud-cli
+	# Docker
+	docker-ce
+	docker-ce-cli
+	containerd.io
+	docker-buildx-plugin
+	docker-compose-plugin
 	# Publicidade-Imagens-Edição
 	gimp
 	inkscape
@@ -192,11 +206,18 @@ SNAP_PROGRAMS=(
 	xournalpp
 	losslesscut
 	# Comunicação
-	telegram-desktop
+	# telegram-desktop
 )
 for nome_do_programa in ${SNAP_PROGRAMS[@]}; do
 	snap_install $nome_do_programa
 done
+
+LOG '2607161042 - NVM e Node Install:'
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+nvm install 22
+nvm use 22
+nvm alias default 22
+npm install -g pm2
 
 LOG '2212201207 - Start .deb APPs instalation:'
 
@@ -225,7 +246,7 @@ wget -qO- https://raw.githubusercontent.com/williampilger/code-nautilus/master/i
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/williampilger/PomodoroTimer-Python/main/install.sh)"
 
 # Instalando o LazyVim
-#bash -c "$(curl -fsSL https://raw.githubusercontent.com/williampilger/nvim/refs/heads/main/install.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/williampilger/nvim/refs/heads/main/install.sh)"
 
 
 LOG '2407111129 - Start Gnome Extensions Instalation:'
@@ -292,36 +313,11 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/or
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ binding "<Primary><Shift>Escape"
 
 # Acesso remoto por RDP
-sudo adduser xrdp ssl-cert# Adicionar xrdp ao grupo ssl-cert (obrigatório no Ubuntu moderno)
-sudo systemctl enable --now xrdp
-
-# Wake-up-on-LAN
-LOG '202407221026 - Configuring Wake-Up-On-LAN'
-INTERFACE="enp1s0"
-sudo ethtool -s $INTERFACE wol g #isso só afeta para a inicialização atual, não é persistido. Abaixo fazendo a alteração que, de fatp, vai ficar
-sudo bash -c "cat > /etc/netplan/01-netcfg.yaml <<EOF
-network:
-  version: 2
-  ethernets:
-    $INTERFACE:
-      dhcp4: yes
-      wakeonlan: true
-EOF"
-sudo netplan apply
-sudo bash -c "cat > /etc/systemd/system/wol.service <<EOF
-[Unit]
-Description=Configure Wake-on-LAN
-
-[Service]
-ExecStart=/usr/sbin/ethtool -s $INTERFACE wol g
-
-[Install]
-WantedBy=multi-user.target
-EOF"
-sudo systemctl enable wol.service
-sudo systemctl start wol.service
+#sudo adduser xrdp ssl-cert# Adicionar xrdp ao grupo ssl-cert (obrigatório no Ubuntu moderno)
+#sudo systemctl enable --now xrdp
 
 LOG '20251216155505 - Configurações gerais do sistema'
 sudo journalctl --vacuum-size=500M #limitando os LOGs do sistema a 500MB
+
 
 LOG '2212200938 - Post-install finished.'
