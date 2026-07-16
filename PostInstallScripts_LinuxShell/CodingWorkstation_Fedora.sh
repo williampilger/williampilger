@@ -9,7 +9,7 @@ echo "
 ============================================================
   Script: Codding Workstation Setup for Fedora
   Version: Adapted for Fedora
-  Latest Version: $(date)
+  Latest Version: 2025-01-21
 ============================================================
 "
 
