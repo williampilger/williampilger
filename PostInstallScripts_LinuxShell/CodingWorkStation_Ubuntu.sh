@@ -230,6 +230,7 @@ DEB_PROGRAMS=(
 #	'https://cdn.insynchq.com/builds/linux/insync_3.8.4.50481-jammy_amd64.deb'
 	'https://download3.ebz.epson.net/dsc/f/03/00/16/21/77/211c32cd14db04ed7838001a6ec0276e5ffd7190/epson-inkjet-printer-escpr_1.8.6-1_amd64.deb'
  	'https://discord.com/api/download?platform=linux&format=deb'
+	'https://mega.nz/linux/repo/xUbuntu_26.04/amd64/megasync-xUbuntu_26.04_amd64.deb'
 )
 for nome_do_programa in ${DEB_PROGRAMS[@]}; do
 	deb_install $nome_do_programa
