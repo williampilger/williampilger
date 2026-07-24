@@ -99,6 +99,12 @@ Architectures: $(dpkg --print-architecture)
 Signed-By: /etc/apt/keyrings/docker.asc
 EOF
 
+# Ngrok
+curl -sSL https://ngrok-agent.s3.amazonaws.com/ngrok.asc \
+  | sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null \
+  && echo "deb https://ngrok-agent.s3.amazonaws.com bookworm main" \
+  | sudo tee /etc/apt/sources.list.d/ngrok.list
+  
 LOG '2212200909 - Start Script. Updating...'
 
 sudo apt update
@@ -146,6 +152,7 @@ APT_PROGRAMS=(
  	terraform
 	google-cloud-cli
 	nginx
+	ngrok
 	# Docker
 	docker-ce
 	docker-ce-cli
