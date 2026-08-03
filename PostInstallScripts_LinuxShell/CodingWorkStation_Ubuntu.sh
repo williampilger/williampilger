@@ -239,7 +239,6 @@ DEB_PROGRAMS=(
  	'https://discord.com/api/download?platform=linux&format=deb'
 	'https://mega.nz/linux/repo/xUbuntu_26.04/amd64/megasync-xUbuntu_26.04_amd64.deb'
 	'https://iriun.gitlab.io/iriunwebcam-2.9.1.deb'
-	'https://si-plg.sicredi.com.br/warsaw_setup_64.deb'
 )
 for nome_do_programa in ${DEB_PROGRAMS[@]}; do
 	deb_install $nome_do_programa
@@ -260,6 +259,11 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/williampilger/PomodoroTi
 # Instalando o LazyVim
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/williampilger/nvim/refs/heads/main/install.sh)"
 
+# Sicredi Warsaw
+wget -O warsaw.run "https://si-plg.sicredi.com.br/warsaw-ubuntu.run"
+chmod +x warsaw.run
+sudo ./warsaw.run
+rm warsaw.run
 
 LOG '2407111129 - Start Gnome Extensions Instalation:'
 # ATENÇÃO: este script de terceiros pode não ser confiável... mas não existe uma forma "oficial" de fazer isso
