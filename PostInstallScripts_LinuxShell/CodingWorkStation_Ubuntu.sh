@@ -239,6 +239,7 @@ DEB_PROGRAMS=(
  	'https://discord.com/api/download?platform=linux&format=deb'
 	'https://mega.nz/linux/repo/xUbuntu_26.04/amd64/megasync-xUbuntu_26.04_amd64.deb'
 	'https://iriun.gitlab.io/iriunwebcam-2.9.1.deb'
+	'https://si-plg.sicredi.com.br/warsaw_setup_64.deb'
 )
 for nome_do_programa in ${DEB_PROGRAMS[@]}; do
 	deb_install $nome_do_programa
