@@ -144,6 +144,7 @@ APT_PROGRAMS=(
 	python3
 	python3-pip
 	python3-tk
+	python3-venv
 	git
 	git-lfs
 	filezilla
