@@ -143,6 +143,7 @@ APT_PROGRAMS=(
 	# Codding
 	python3
 	python3-pip
+	python3-tk
 	git
 	git-lfs
 	filezilla
@@ -153,6 +154,7 @@ APT_PROGRAMS=(
 	google-cloud-cli
 	nginx
 	ngrok
+	mysql-client-core
 	# Docker
 	docker-ce
 	docker-ce-cli
