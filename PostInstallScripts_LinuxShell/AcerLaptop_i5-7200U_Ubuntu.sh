@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ## Execute diretamente usando:
-## bash -c "$(curl -fsSL https://raw.githubusercontent.com/williampilger/williampilger/main/PostInstallScripts_LinuxShell/CodingWorkStation_Ubuntu.sh)"
+## bash -c "$(curl -fsSL https://raw.githubusercontent.com/williampilger/williampilger/main/PostInstallScripts_LinuxShell/AcerLaptop_i5-7200U_Ubuntu.sh)"
 
 echo "
 ============================================================
@@ -9,9 +9,9 @@ echo "
 ============================================================
   Script: Light Domestic Notebook Setup for Ubuntu
   VERSÃO DO SISTEMA: Ubuntu - 26.04 LTS
-  Hardware: 
-  Latest Version: 2026-10-19
-  Statistics: Tris script takes less than 1 hour (depends on your internet connection, obviously)
+  Hardware: Acer Aspire 5 (i5-7200U)
+  Latest Version: 2026-10-22
+  Statistics: This script takes less than 1 hour (depends on your internet connection, obviously)
               Author: Williampilger                         
 ============================================================
 
@@ -24,21 +24,21 @@ LOG(){
 
 deb_install(){
 	URL=$1
-	cd /home/$USER/Downloads
-	wget -O setup.deb "$URL"
-	sudo dpkg -i setup.deb
+	DEB_FILE=$(mktemp --suffix=.deb)
+	wget -O "$DEB_FILE" "$URL"
+	sudo dpkg -i "$DEB_FILE"
 	if [ "$?" == 0 ]; then
 		LOG "	2212201205 - Successfully install .DEB '$URL'."
 	else
 		LOG "	2212201206 - Impossible install .DEB '$URL'."
 	fi
-	apt --fix-broken install -y
-	rm setup.deb
+	sudo apt --fix-broken install -y
+	rm "$DEB_FILE"
 }
 
 apt_install(){
 	SOFTWARE=$1
-	if ! dpkg -l | grep -q $SOFTWARE; then
+	if ! dpkg -s "$SOFTWARE" &>/dev/null; then
 		sudo apt-get install -y $SOFTWARE
 		if [ "$?" == 0 ]; then
 			LOG "	2212200855 - Successfully install SYSTEM $SOFTWARE."
@@ -89,7 +89,7 @@ Components: stable
 Architectures: $(dpkg --print-architecture)
 Signed-By: /etc/apt/keyrings/docker.asc
 EOF
-  
+
 LOG '2212200909 - Start Script. Updating...'
 
 sudo apt update
@@ -108,16 +108,15 @@ APT_PROGRAMS=(
 	samba
 	xclip
 	gdebi
-	p7zip
-	p7zip-full
-	p7zip-rar
+	7zip
+	7zip-rar
 	gnome-software-plugin-flatpak
  	gnome-shell-extensions
 	ubuntu-drivers-common
   	flatpak
 	transmission
 	kdeconnect
-  	cheese
+  	gnome-snapshot
    	btrfs-progs # suporte ao sistema de arquivos BTRFS
 	cryptsetup # suporte à criptografia de unidades
 	# Codding
@@ -130,7 +129,6 @@ APT_PROGRAMS=(
 	filezilla
 	gnupg
 	gnupg2
-	google-cloud-cli
 	mysql-client-core
 	# Docker
 	docker-ce
@@ -188,13 +186,16 @@ npm install -g pm2
 
 LOG '2212201207 - Start .deb APPs instalation:'
 
+# Responde antecipadamente a pergunta do .deb do VS Code (senão o script trava esperando)
+echo "code code/add-microsoft-repo boolean true" | sudo debconf-set-selections
+
 DEB_PROGRAMS=(
 	'https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb'
 	'https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64'
-	'https://cdn.insynchq.com/builds/linux/insync_3.8.4.50481-jammy_amd64.deb'
+#	'https://cdn.insynchq.com/builds/linux/insync_3.8.4.50481-jammy_amd64.deb'
 	'https://download3.ebz.epson.net/dsc/f/03/00/16/21/77/211c32cd14db04ed7838001a6ec0276e5ffd7190/epson-inkjet-printer-escpr_1.8.6-1_amd64.deb'
- 	'https://discord.com/api/download?platform=linux&format=deb'
-	'https://mega.nz/linux/repo/xUbuntu_26.04/amd64/megasync-xUbuntu_26.04_amd64.deb'
+# 	'https://discord.com/api/download?platform=linux&format=deb'
+#	'https://mega.nz/linux/repo/xUbuntu_26.04/amd64/megasync-xUbuntu_26.04_amd64.deb'
 )
 for nome_do_programa in ${DEB_PROGRAMS[@]}; do
 	deb_install $nome_do_programa
@@ -219,8 +220,18 @@ LOG '2407111129 - Start Gnome Extensions Instalation:'
 # ATENÇÃO: este script de terceiros pode não ser confiável... mas não existe uma forma "oficial" de fazer isso
 sudo wget -O /usr/local/bin/gnome-shell-extension-installer https://raw.githubusercontent.com/brunelli/gnome-shell-extension-installer/master/gnome-shell-extension-installer
 sudo chmod +x /usr/local/bin/gnome-shell-extension-installer
-gnome-shell-extension-installer 6242 # Instalando Emogi Copy
-gnome-extensions enable emoji-copy@felipeftn
+gnome-shell-extension-installer --yes 6242 # Instalando Emoji Copy
+# No Wayland a extensão nova só é reconhecida após logout/login, então `gnome-extensions enable` falharia agora.
+# Em vez disso, adiciona na lista de extensões habilitadas, e ela ativa no próximo login.
+ENABLED_EXTENSIONS=$(gsettings get org.gnome.shell enabled-extensions)
+if [[ "$ENABLED_EXTENSIONS" != *"emoji-copy@felipeftn"* ]]; then
+	if [[ "$ENABLED_EXTENSIONS" == "@as []" ]]; then
+		ENABLED_EXTENSIONS="['emoji-copy@felipeftn']"
+	else
+		ENABLED_EXTENSIONS="${ENABLED_EXTENSIONS%]}, 'emoji-copy@felipeftn']"
+	fi
+	gsettings set org.gnome.shell enabled-extensions "$ENABLED_EXTENSIONS"
+fi
 
 # Acesso SSH
 LOG '202407221023 - Start SSH Access configuration'
@@ -237,7 +248,7 @@ LOG '202407221022 - Start Firewall configuration'
 sudo ufw allow from 192.168.0.0/16 to any
 sudo ufw allow from 172.17.0.0/16 to any
 sudo ufw allow from 100.64.0.0/10 to any
-sudo ufw enable
+sudo ufw --force enable
 
 # Docker user Configuration
 sudo usermod -aG docker $USER
@@ -262,7 +273,6 @@ gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-left "['<Cont
 gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-right "['<Control><Super>Right']"
 gsettings set org.gnome.shell favorite-apps "['org.gnome.Nautilus.desktop', 'google-chrome.desktop']"
 # Outros Diversos
-gsettings set org.gnome.gedit.preferences.editor restore-session false
 gsettings set org.gnome.settings-daemon.plugins.power power-button-action 'suspend'
 
 # Atalhos personalizados de teclado
